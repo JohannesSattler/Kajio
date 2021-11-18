@@ -1,9 +1,9 @@
 # Kajio
 
-##Description: 
+## Description: 
 Kajio is an anonymous social media platform where you can post thoughts, pictures and ideas. With every post other users will be able to either upvote, downvote, or comment on the post. There will be other sections outside of the regular post feed that feature the most liked posts of the day, the most interacted with posts of a certain time frame, and the newest posts for those who like to be first on the scene. 
 
-##MVP: 
+## MVP: 
 
 Model/Schema (User / Post)
 Routes
@@ -17,7 +17,7 @@ upvotes
 hot / trendy / new posts
 profile section (manage your posts)
 
-##Backlog:
+## Backlog:
 Random API chat forum
 geographical forum
 Dark mode
@@ -27,7 +27,7 @@ search function/topic filter (if theres times….) by topic
 leaderboard 
 image posts
 
-##Data Structure:
+## Data Structure:
 server.js
 - Require the app
 - port env
@@ -41,7 +41,7 @@ app.js
 - require config
 - show project name here
 
-##ROUTES
+## ROUTES
 - GET/
 	-renders login-signup.hbs
 - GET/ auth/ register
@@ -75,7 +75,7 @@ app.js
 	-redirect to /newpost when post icon is clicked
 	- redirect to /profile when profile icon is clicked
 
-##MODELS
+## MODELS
 - UserModel: 
   - user: 	String, Must be unique ( key for populating data )
   - email: 		String, Must be unique and validated
