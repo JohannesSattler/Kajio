@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
-    "userseed": "node .\\seed\\User.seed.js"
+    "seed": "node .\\seed\\Main.seed.js"
   },
   "dependencies": {
     "cookie-parser": "^1.4.6",

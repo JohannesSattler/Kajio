@@ -11,13 +11,13 @@ function createFakeUser() {
     return {username, email, password}
 }
 
-async function plotUserInDB() {
+async function plotUserInDB(userData) {
     try {
-        const user = await UserModel.create(createFakeUser())
+        const user = await UserModel.create(userData)
         console.log(user)
     } catch (error) {
         console.log(error)
     }
 }
 
-plotUserInDB()
+module.exports = {createFakeUser, plotUserInDB}
