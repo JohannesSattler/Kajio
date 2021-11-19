@@ -6,10 +6,10 @@ const userSchema = new Schema(
       type: String,
       unique: true,
     },
-    email: {
-      type: String,
-      unique: true,
-    },
+    // // email: {
+    // //   type: String,
+    // //   unique: false,
+    // },
     password: String,
     postCreated: Array,
     postUpvoted: Array,
