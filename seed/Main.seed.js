@@ -30,9 +30,13 @@ async function mainPlotting(amount) {
         const newUser = UserSeed.createFakeUser([post._id], [post._id], [comment._id])
         const user = await UserSeed.plotUserInDB(newUser)
 
-        console.log({user, post, comment})
-
-        await UserSeed.populateById(user._id)
+        // populate the user
+        const popUser = await UserSeed.populateById(user._id)
+        console.log({popUser}, popUser.postCreated[0])
+        
+        await UserModel.findByIdAndUpdate(user._id, {
+            postCreated: user.postCreated,
+        })
     }
 }
 

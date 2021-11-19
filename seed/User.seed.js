@@ -31,7 +31,7 @@ async function populateById(id) {
     .populate('postUpvoted')
     .populate('comments')
 
-    console.log({user})
+    return user;
 }
 
 module.exports = {
