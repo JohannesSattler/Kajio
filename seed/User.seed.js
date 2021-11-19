@@ -1,7 +1,5 @@
 const faker = require('faker');
-require('../db');
 const UserModel = require('../models/User.model');
-
 
 function createFakeUser() {
     const username = faker.internet.userName()
