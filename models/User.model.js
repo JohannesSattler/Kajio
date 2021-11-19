@@ -4,14 +4,13 @@ const userSchema = new Schema(
   {
     username: {
       type: String,
-      require: true,
+      unique: true,
     },
     email: {
       type: String,
       unique: true,
     },
     password: String,
-    totalUpvotes: Number,
     postCreated: Array,
     postUpvoted: Array,
     comments: Array,
