@@ -16,6 +16,18 @@ router.get('/comment', (req, res, next) => {
     res.render('auth/comment.hbs')
 })
 
+router.post('/comment', (req, res, next) => {
+    const{username, sentence} = req.body
+
+    CommentModel.create({username, sentence})
+    .then(() => { 
+        res.redirect('/profile')
+    })
+    .catch((err) => {
+        next(err)
+    })
+})
+
 router.get('/homepage', (req, res, next) => {
     res.render('auth/homepage.hbs')
 })
@@ -23,6 +35,11 @@ router.get('/homepage', (req, res, next) => {
 router.get('/profile', (req, res, next) => {
     res.render('auth/profile.hbs')
 })
+
+router.post('/profile', (req, res, next) => {
+    res.render('auth/profile.hbs')
+})
+
 router.post('/signup', (req, res, next) => {
     const {username, password} = req.body
 

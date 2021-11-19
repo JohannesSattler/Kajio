@@ -26,12 +26,24 @@ async function plotUserInDB(userData) {
 }
 
 async function populateById(id) {
-    const user = await UserModel.findById(id)
-    .populate('postCreated')
-    .populate('postUpvoted')
-    .populate('comments')
+    try {
+        const user = await UserModel.findById(id)
+            .populate('postCreated')
+            .populate('postUpvoted')
+            .populate('comments')
+        
+        user.postCreated.forEach(async post => {
+            await post.populate('comments')
+        });
 
-    return user;
+        user.postUpvoted.forEach(async post => {
+            await post.populate('comments')
+        });
+        
+        return user;
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 module.exports = {
