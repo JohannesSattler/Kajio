@@ -4,7 +4,10 @@ const postSchema = new Schema(
   {
     sentence: String,
     upvotes: Number,
-    comments: Array,
+    comments: [{
+      type: Schema.Types.ObjectId,
+      ref: 'Comments',
+    }],
   },
   {
     timestamps: true,

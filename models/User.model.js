@@ -2,18 +2,21 @@ const { Schema, model } = require("mongoose");
 
 const userSchema = new Schema(
   {
-    username: {
-      type: String,
-      unique: true,
-    },
-    email: {
-      type: String,
-      unique: true,
-    },
+    username: String,
+    email: String,
     password: String,
-    postCreated: Array,
-    postUpvoted: Array,
-    comments: Array,
+    postCreated: [{
+      type: Schema.Types.ObjectId,
+      ref: 'Posts',
+    }],
+    postUpvoted: [{
+      type: Schema.Types.ObjectId,
+      ref: 'Posts',
+    }],
+    comments: [{
+      type: Schema.Types.ObjectId,
+      ref: 'Comments',
+    }],
   },
   {
     timestamps: true,

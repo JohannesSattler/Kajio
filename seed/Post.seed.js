@@ -1,17 +1,17 @@
 const faker = require('faker');
 const PostModel = require('../models/Post.model');
 
-function createFakePost() {
+function createFakePost(comments = []) {
     const sentence = faker.hacker.phrase()
     const upvotes = Math.floor(Math.random() * 10)
 
-    return {sentence, upvotes}
+    return {sentence, upvotes, comments}
 }
 
 async function plotPostInDB(postData) {
     try {
         const post = await PostModel.create(postData)
-        console.log(post)
+        return post;
     } catch (error) {
         console.log(error)
     }
