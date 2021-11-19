@@ -16,8 +16,16 @@ router.get('/comment', (req, res, next) => {
     res.render('auth/comment.hbs')
 })
 
-route.post('/comment', (req, res, next) => {
-    const{username} = req
+router.post('/comment', (req, res, next) => {
+    const{username, sentence} = req.body
+
+    CommentModel.create({username, sentence})
+    .then(() => { 
+        res.redirect('/profile')
+    })
+    .catch((err) => {
+        next(err)
+    })
 })
 
 router.get('/homepage', (req, res, next) => {
