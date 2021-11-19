@@ -11,7 +11,6 @@ const userSchema = new Schema(
       unique: true,
     },
     password: String,
-    totalUpvotes: Number,
     postCreated: Array,
     postUpvoted: Array,
     comments: Array,
