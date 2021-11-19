@@ -2,10 +2,7 @@ const { Schema, model } = require("mongoose");
 
 const commentSchema = new Schema(
   {
-    username: {
-      type: String,
-      require: true,
-    },
+    username: String,
     sentence: String,
   },
   {

@@ -21,15 +21,19 @@ async function mainPlotting(amount) {
     await deleteAll()
 
     for(let i = 0; i < amount; i++) {
-        const newUser = UserSeed.createFakeUser()
-        UserSeed.plotUserInDB(newUser)
-        
         const newPost = PostSeed.createFakePost()
-        PostSeed.plotPostInDB(newPost)
+        const post = await PostSeed.plotPostInDB(newPost)
 
         const newComment = CommentSeed.createFakeComment()
-        CommentSeed.plotCommentInDB(newComment)
+        const comment = await CommentSeed.plotCommentInDB(newComment)
+        
+        const newUser = UserSeed.createFakeUser([post._id], [post._id], [comment._id])
+        const user = await UserSeed.plotUserInDB(newUser)
+
+        console.log({user, post, comment})
+
+        await UserSeed.populateById(user._id)
     }
 }
 
-mainPlotting(10)
+mainPlotting(1)

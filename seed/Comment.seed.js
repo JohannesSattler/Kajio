@@ -11,7 +11,7 @@ function createFakeComment() {
 async function plotCommentInDB(postData) {
     try {
         const comment = await CommentModel.create(postData)
-        console.log(comment)
+        return comment;
     } catch (error) {
         console.log(error)
     }

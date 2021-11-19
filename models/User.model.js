@@ -11,9 +11,18 @@ const userSchema = new Schema(
       unique: true,
     },
     password: String,
-    postCreated: Array,
-    postUpvoted: Array,
-    comments: Array,
+    postCreated: [{
+      type: Schema.Types.ObjectId,
+      ref: 'Posts',
+    }],
+    postUpvoted: [{
+      type: Schema.Types.ObjectId,
+      ref: 'Posts',
+    }],
+    comments: [{
+      type: Schema.Types.ObjectId,
+      ref: 'Comments',
+    }],
   },
   {
     timestamps: true,

@@ -11,7 +11,7 @@ function createFakePost() {
 async function plotPostInDB(postData) {
     try {
         const post = await PostModel.create(postData)
-        console.log(post)
+        return post;
     } catch (error) {
         console.log(error)
     }
