@@ -35,6 +35,11 @@ router.get('/homepage', (req, res, next) => {
 router.get('/profile', (req, res, next) => {
     res.render('auth/profile.hbs')
 })
+
+router.post('/profile', (req, res, next) => {
+    res.render('auth/profile.hbs')
+})
+
 router.post('/signup', (req, res, next) => {
     const {username, password} = req.body
 
