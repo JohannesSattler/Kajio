@@ -16,6 +16,10 @@ router.get('/comment', (req, res, next) => {
     res.render('auth/comment.hbs')
 })
 
+route.post('/comment', (req, res, next) => {
+    const{username} = req
+})
+
 router.get('/homepage', (req, res, next) => {
     res.render('auth/homepage.hbs')
 })
