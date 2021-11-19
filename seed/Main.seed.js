@@ -17,6 +17,11 @@ async function deleteAll() {
     await CommentModel.deleteMany()
 }
 
+/**
+ * Creates n comments
+ * @param {Number} amount the amount of comments
+ * @returns all the ids of the comments
+ */
 async function createComments(amount) {
     const ids = [];
 
@@ -29,6 +34,11 @@ async function createComments(amount) {
     return ids;
 }
 
+/**
+ * Creates n posts with comments
+ * @param {Number} amount the amount of posts
+ * @returns all the ids of the posts
+ */
 async function createPosts(amount) {
     const ids = [];
 
@@ -36,12 +46,19 @@ async function createPosts(amount) {
         const comments = await createComments(Math.floor(Math.random() * 10))
         const newPost = PostSeed.createFakePost(comments)
         const post = await PostSeed.plotPostInDB(newPost)
-        ids.push(post._id)
+
+        const popPost = await PostSeed.populateById(post._id)
+
+        ids.push(popPost._id)
     }
 
     return ids;
 }
 
+/**
+ * Creates n users and populates the user with posts & comments
+ * @param {Number} amount amount of users that will be created
+ */
 async function mainPlotting(amount) {
     await deleteAll()
 
@@ -55,10 +72,8 @@ async function mainPlotting(amount) {
 
         // populate the user
         const popUser = await UserSeed.populateById(user._id)
-
-        console.log({
-            popUser
-        }, popUser.postCreated[0])
+        
+        console.log(popUser);
     }
 }
 

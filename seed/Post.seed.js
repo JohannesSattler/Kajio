@@ -17,4 +17,15 @@ async function plotPostInDB(postData) {
     }
 }
 
-module.exports = {createFakePost, plotPostInDB}
+async function populateById(id) {
+    try {
+        const post = await PostModel.findById(id)
+            .populate('comments')
+    
+        return post;
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+module.exports = {createFakePost, plotPostInDB, populateById}
