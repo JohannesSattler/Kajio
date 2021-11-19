@@ -95,4 +95,14 @@ app.js
 - CommentModel: 
   - user: 	String ( key for populating data )
   - Sentence: 	String
-timeCreated: 	Date?
+  - timeCreated: 	Date?
+
+# Links
+
+[Github Repository](https://github.com/JohannesSattler/Kajio)
+[Trello Board](https://trello.com/b/DZP4W8RC/kajio)
+
+## Deploy
+[Github Pages]
+[Deploy link]
+
