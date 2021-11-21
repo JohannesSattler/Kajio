@@ -29,4 +29,6 @@ function convertToTimeAgo(timestamp) {
     return sentence
 }
 
+module.exports = {convertToTimeAgo}
+
 

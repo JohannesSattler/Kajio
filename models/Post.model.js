@@ -3,7 +3,14 @@ const { Schema, model } = require("mongoose");
 const postSchema = new Schema(
   {
     sentence: String,
-    upvotes: Number,
+    upvotes: [{
+      type: Schema.Types.ObjectId,
+      ref: 'Users',
+    }],
+    downvotes: [{
+      type: Schema.Types.ObjectId,
+      ref: 'Users',
+    }],
     comments: [{
       type: Schema.Types.ObjectId,
       ref: 'Comments',
