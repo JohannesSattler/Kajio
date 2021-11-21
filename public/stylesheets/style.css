@@ -102,7 +102,7 @@ ul li {
 
 /* PARTIALS */
 .post-holder {
-  margin: 10px 10px;
+  margin: 20px 10px;
   border-radius: 5px;
   width: 500px;
   padding: 0px;
@@ -133,9 +133,11 @@ ul li {
 .vote-arrow {
   height: 40px;
 }
+
 #votes-uparrow {
 
 }
+
 #votes-amount {
   font-size: 1.5em;
   padding: 0;
@@ -143,6 +145,7 @@ ul li {
   line-height: 0;
   text-align: center;
 }
+
 #votes-downarrow {
 
 }
