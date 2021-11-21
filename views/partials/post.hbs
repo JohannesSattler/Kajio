@@ -2,16 +2,15 @@
     <div class="top-holder">
         <div class="content-holder">
             <p>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sint, voluptates.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, aut ex repudiandae ducimus quae
-                necessitatibus ipsam recusandae perferendis quo tenetur sapiente exercitationem voluptatum ratione,
-                architecto ea mollitia ullam ipsum nostrum!
+                {{this.sentence}}
             </p>
         </div>
         <div class="vote-holder">
             <img id="votes-uparrow" class="vote-arrow"
             src="https://cdn3.iconfinder.com/data/icons/faticons/32/arrow-up-01-512.png" alt="">
-            <p id="votes-amount">0</p>
+            <p id="votes-amount"> 
+                {{this.upvotes}} 
+            </p>
             <img id="votes-downarrow" class="vote-arrow"
                 src="https://cdn3.iconfinder.com/data/icons/faticons/32/arrow-down-01-512.png" alt="">
         </div>
@@ -20,14 +19,16 @@
     <div class="bottom-holder">
         <div id="time-ago">
             <img src="https://cdn2.iconfinder.com/data/icons/pittogrammi/142/10-512.png" alt="">
-            <p>2 min ago</p>
+            <p> 
+                {{this.timeAgo}} 
+            </p>
         </div>
         <div id="comment-sect">
             <a href="#">
                 Go to comments
             </a>
             <p>
-                0 comments
+                {{this.comments.length}} comments
             </p>
         </div>
     </div>
