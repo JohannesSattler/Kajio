@@ -24,6 +24,8 @@ const capitalized = (string) => string[0].toUpperCase() + string.slice(1).toLowe
 
 app.locals.title = `${capitalized(projectName)} created with IronLauncher`;
 
+//app.use(express.static(__dirname + '/public'));
+
 // register partials
 hbs.registerPartials(__dirname + '/views/partials')
 
