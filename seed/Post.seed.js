@@ -3,9 +3,9 @@ const PostModel = require('../models/Post.model');
 
 function createFakePost(comments = []) {
     const sentence = faker.hacker.phrase()
-    const upvotes = Math.floor(Math.random() * 10)
-
-    return {sentence, upvotes, comments}
+    const upvotes = []
+    const downvotes = []
+    return {sentence, upvotes, downvotes, comments}
 }
 
 async function plotPostInDB(postData) {
