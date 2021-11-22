@@ -18,8 +18,8 @@ router.post("/home/vote", async (req, res, next) => {
 
   const final = await PostModel.findByIdAndUpdate(postID, updatedPost)
   
-
-  res.status(204).send();
+  
+  res.status(200).send();
 });
 
 module.exports = router;

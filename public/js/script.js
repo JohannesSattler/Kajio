@@ -27,8 +27,24 @@ async function handleVoteClick(event) {
   const userID = parent.querySelector('.user-objectID').id
   const postID = parent.querySelector('.post-objectID').id
   const upOrDownVote = event.currentTarget.id == 'votes-uparrow';
-  
-  console.log(parent)
+
+  const downVote = parent.querySelector('#votes-downarrow')
+  const upVote = parent.querySelector('#votes-uparrow')
+  const counter = parent.querySelector('#votes-amount')
+  let currentCount = Number(counter.innerText)
+
+  console.log(currentCount)
+
+  if(upOrDownVote) {
+    upVote.classList.add('img-selected', 'img-upvote')
+    downVote.classList.remove('img-selected', 'img-downvote')
+    counter.innerText = currentCount+1;
+  } 
+  else {
+    upVote.classList.remove('img-selected', 'img-upvote')
+    downVote.classList.add('img-selected', 'img-downvote')
+    counter.innerText = currentCount-1;
+  }
 
   const data = await fetch("http://localhost:3000/home/vote", {
     method: 'POST',

@@ -48,11 +48,11 @@ router.post('/signup', (req, res, next) => {
 
 UserModel.create({username, password}) //:hash for regex pw
    .then(() => {
-    res.redirect('/')
-})
-.catch((err) => {
-    next(err)
-})
+        res.redirect('/')
+    })
+    .catch((err) => {
+        next(err)
+    })
 });
 
 router.post('/login', (req, res, next) => {
@@ -60,6 +60,7 @@ router.post('/login', (req, res, next) => {
 
     UserModel.find({username})
     .then((usernameResponse) => {
+        console.log(usernameResponse.length);
         if(usernameRespone.length){
             let userObj = usernameResponse[0]
 
@@ -73,11 +74,11 @@ router.post('/login', (req, res, next) => {
                 res.render('auth/login.hbs', {error: 'Password not matching'})
                 return;
               }
-          }
-          else {
-            res.render('auth/login.hbs', {error: 'User email does not exist'})
-            return;
-          }
+        }
+        else {
+        res.render('auth/login.hbs', {error: 'User email does not exist'})
+        return;
+        }
       })
       .catch((err) => {
         next(err)
