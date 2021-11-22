@@ -1,4 +1,6 @@
 <h2>this is my main Page</h2>
-{{#each posts}}
-    {{> post}}
-{{/each}}
+<div id="main-container">
+    {{#each posts}}
+        {{> post data=this}}
+    {{/each}}
+</div>

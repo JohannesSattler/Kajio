@@ -1,14 +1,14 @@
-<div class="post-holder" id="{{this._id}}">
+<div class="post-holder" id="{{data._id}}">
     <div class="top-holder">
         <div class="content-holder">
             <p>
-                {{this.sentence}}
+                {{data.sentence}}
             </p>
         </div>
         <div class="vote-holder">
-            <div class="post-objectID" id="{{this._id}}"></div>
-            <div class="user-objectID" id="{{this.userid}}"></div>
-            {{#if this.upvote}}
+            <div class="post-objectID" id="{{data._id}}"></div>
+            <div class="user-objectID" id="{{data.userid}}"></div>
+            {{#if data.upvote}}
                 <img id="votes-uparrow" class="vote-arrow img-selected img-upvote"
                 src="https://cdn3.iconfinder.com/data/icons/faticons/32/arrow-up-01-512.png">
                 {{else}}
@@ -17,10 +17,10 @@
             {{/if}}
 
             <p id="votes-amount"> 
-                {{this.votes}} 
+                {{data.votes}} 
             </p>
 
-            {{#if this.downvote}}
+            {{#if data.downvote}}
                 <img id="votes-downarrow" class="vote-arrow img-selected img-downvote"
                 src="https://cdn3.iconfinder.com/data/icons/faticons/32/arrow-down-01-512.png">
                 {{else}}
@@ -34,15 +34,15 @@
         <div id="time-ago">
             <img src="https://cdn2.iconfinder.com/data/icons/pittogrammi/142/10-512.png" alt="">
             <p> 
-                {{this.timeAgo}} 
+                {{data.timeAgo}} 
             </p>
         </div>
         <div id="comment-sect">
-            <a href="/comment/{{this._id}}">
+            <a href="/comment/{{data._id}}">
                 Go to comments
             </a>
             <p>
-                {{this.comments.length}} comments
+                {{data.comments.length}} comments
             </p>
         </div>
     </div>
