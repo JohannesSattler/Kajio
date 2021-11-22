@@ -7,8 +7,8 @@ document.addEventListener(
   false
 );
 
+// https://stackoverflow.com/a/22480938/14548868
 function isScrolledIntoView(elem) {
-  console.log('scrollllllooo')
   const rect = elem.getBoundingClientRect();
   const elemTop = rect.top;
   const elemBottom = rect.bottom;
@@ -20,17 +20,44 @@ function isScrolledIntoView(elem) {
   return isVisible;
 }
 
-const firstIndex = 10;
+let startIndex = 10;
+const increment = 10;
+
+async function infiniteScroller() {
+
+  const data = await fetch("http://localhost:3000/home/next-posts", {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      startIndex,
+      increment
+    })
+  })
+
+  console.log(startIndex, increment)
+
+  const response = JSON.parse(await data.json())
+  const container = document.querySelector('#main-container')
+
+  response.htmlArray.forEach(html => {
+    container.insertAdjacentHTML('beforeend', html)
+  })
+
+  startIndex += increment;
+}
 
 function addAllEventListeners() {
-  const posts = document.querySelectorAll('.post-holder')
+  let posts = document.querySelectorAll('.post-holder')
   if(posts.length) {
     posts.forEach(async (post, index) => handlePostEvents(post))
   };
 
   document.addEventListener('scroll', () => {
-    if(isScrolledIntoView(posts[posts.length - 3])) {
-      console.log('is Visible')
+    if(isScrolledIntoView(posts[posts.length-1])) {
+      infiniteScroller()
+      posts = document.querySelectorAll('.post-holder')
     }
   })
 }

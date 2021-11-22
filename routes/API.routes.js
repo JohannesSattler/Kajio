@@ -1,7 +1,13 @@
 const router = require("express").Router();
+const hbs = require("handlebars");
+
+const fs = require("fs");
+const path = require('path');
 
 const PostModel = require('../models/Post.model');
 const UserModel = require('../models/User.model');
+
+const Helpers = require('../scripts/helpers')
 
 // Route to upvote and downvote
 router.post("/home/vote", async (req, res, next) => {
@@ -37,7 +43,29 @@ router.post("/home/vote", async (req, res, next) => {
 
 // infinite scroll get next post after point x
 router.post("/home/next-posts", async (req, res, next) => {
-    
+  const {startIndex, increment} = req.body
+  const posts = await PostModel.find().skip(startIndex).limit(increment)
+
+  const templateStr = fs.readFileSync(path.resolve(__dirname, '../views/partials/post.hbs')).toString('utf8')
+  const template = hbs.compile(templateStr)
+
+  const currentUser = await UserModel.find()
+
+  const htmlArray = []
+
+  posts.forEach(post => {
+    Helpers.createAdvancedPostKeys(post, currentUser[0]._id)
+
+    const html = template({data: post}, {
+      allowedProtoProperties: true,
+      allowProtoMethodsByDefault: true,
+      allowProtoPropertiesByDefault: true,
+    });
+
+    htmlArray.push(html)
+  })
+
+  res.status(200).json(JSON.stringify({htmlArray}))
 });
 
 module.exports = router;
