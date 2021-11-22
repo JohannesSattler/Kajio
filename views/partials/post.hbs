@@ -8,13 +8,25 @@
         <div class="vote-holder">
             <div class="post-objectID" id="{{this._id}}"></div>
             <div class="user-objectID" id="{{this.userid}}"></div>
-            <img id="votes-uparrow" class="vote-arrow"
-            src="https://cdn3.iconfinder.com/data/icons/faticons/32/arrow-up-01-512.png">
+            {{#if this.upvote}}
+                <img id="votes-uparrow" class="vote-arrow img-selected img-upvote"
+                src="https://cdn3.iconfinder.com/data/icons/faticons/32/arrow-up-01-512.png">
+                {{else}}
+                <img id="votes-uparrow" class="vote-arrow"
+                src="https://cdn3.iconfinder.com/data/icons/faticons/32/arrow-up-01-512.png">
+            {{/if}}
+
             <p id="votes-amount"> 
                 {{this.votes}} 
             </p>
-            <img id="votes-downarrow" class="vote-arrow"
-            src="https://cdn3.iconfinder.com/data/icons/faticons/32/arrow-down-01-512.png">
+
+            {{#if this.downvote}}
+                <img id="votes-downarrow" class="vote-arrow img-selected img-downvote"
+                src="https://cdn3.iconfinder.com/data/icons/faticons/32/arrow-down-01-512.png">
+                {{else}}
+                <img id="votes-downarrow" class="vote-arrow"
+                src="https://cdn3.iconfinder.com/data/icons/faticons/32/arrow-down-01-512.png">
+            {{/if}}
         </div>
     </div>
     <div class="line-break"></div>
