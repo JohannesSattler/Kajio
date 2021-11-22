@@ -10,12 +10,10 @@ document.addEventListener(
 function addAllEventListeners() {
   const posts = document.querySelectorAll('.post-holder')
   if(posts.length) {
-    posts.forEach(post => handlePostEvents(post))
+    posts.forEach(async post => {
+      handlePostEvents(post)
+    })
   };
-}
-
-function checkIfVoted(post) {
-  
 }
 
 function handlePostEvents(post) {
