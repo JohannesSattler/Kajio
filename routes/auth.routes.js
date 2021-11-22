@@ -38,6 +38,18 @@ router.get('/profile', (req, res, next) => {
     UserModel.findById({user})
 
 })
+//delete button route
+router.post('/profile', (req, res, next) => {
+    const user = req.session.username
+    UserModel.findById({username})
+    .then(() => {
+        res.redirect('auth/signup.hbs')
+    })
+    .catch((err) => {
+        next((err))
+    })
+
+})
 
 router.post('/profile', (req, res, next) => {
     res.render('auth/profile.hbs')
