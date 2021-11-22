@@ -38,7 +38,7 @@ router.get('/profile', (req, res, next) => {
     UserModel.findById({user})
 
 })
-//delete button route
+//delete button route redirection
 router.post('/profile', (req, res, next) => {
     const user = req.session.username
     UserModel.findById({username})
