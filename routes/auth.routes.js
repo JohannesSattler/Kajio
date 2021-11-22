@@ -34,6 +34,9 @@ router.get('/homepage', (req, res, next) => {
 
 router.get('/profile', (req, res, next) => {
     res.render('auth/profile.hbs')
+    const user = req.session.myProperty
+    UserModel.findById({user})
+
 })
 
 router.post('/profile', (req, res, next) => {
