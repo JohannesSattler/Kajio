@@ -231,3 +231,10 @@ ul li {
 #comment-sect * {
   margin-right: 10px;
 }
+
+.post-holder{
+
+  overflow-y: scroll;
+  height: 500px
+
+}
