@@ -1,6 +1,8 @@
 const router = require("express").Router();
+const CommentModel = require("../models/Comment.model");
 const PostModel = require('../models/Post.model');
 const UserModel = require('../models/User.model');
+
 const Helpers = require('../scripts/helpers')
 
 /* GET home page */
@@ -14,20 +16,20 @@ router.get("/home", async (req, res, next) => {
 
   // create min ago field
   posts.forEach(post => {
-    if(post.upvotes.includes(currentUser[0]._id)) {
-      post.upvote = "some"
-    }
-    if(post.downvotes.includes(currentUser[0]._id)) {
-      post.downvote = "some"
-    }
-
-    post.votes = post.upvotes.length - post.downvotes.length
-    post.timeAgo = Helpers.convertToTimeAgo(post.createdAt)
-    post.userid = currentUser[0]._id
+    Helpers.createAdvancedPostKeys(post, currentUser[0]._id)
   })
 
   res.render("pages/main.hbs", {posts});
 });
 
+router.get("/comment/:postId", async (req, res, next) => {
+  const {postId} = req.params
+  const post = await PostModel.findById(postId).populate('comments')
+  
+  const currentUser = await UserModel.find()
+  Helpers.createAdvancedPostKeys(post, currentUser[0]._id)
+
+  res.render("auth/comment.hbs", {post: [post], comments: post.comments});
+});
 
 module.exports = router;
