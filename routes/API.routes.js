@@ -30,6 +30,7 @@ router.post("/home/vote", async (req, res, next) => {
 
   await PostModel.findByIdAndUpdate(postID, updatedPost)
 
+  // send back the votes data
   const votes = updatedPost.upvotes.length - updatedPost.downvotes.length
   res.status(200).json(JSON.stringify({votes}))
 });
