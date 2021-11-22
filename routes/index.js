@@ -11,7 +11,7 @@ router.get("/", (req, res, next) => {
 });
 
 router.get("/home", async (req, res, next) => {
-  const posts = await PostModel.find()
+  const posts = await PostModel.find().limit(10)
   const currentUser = await UserModel.find()
 
   // create min ago field

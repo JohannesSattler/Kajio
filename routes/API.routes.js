@@ -35,4 +35,9 @@ router.post("/home/vote", async (req, res, next) => {
   res.status(200).json(JSON.stringify({votes}))
 });
 
+// infinite scroll get next post after point x
+router.post("/home/next-posts", async (req, res, next) => {
+    
+});
+
 module.exports = router;

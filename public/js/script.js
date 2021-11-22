@@ -7,13 +7,32 @@ document.addEventListener(
   false
 );
 
+function isScrolledIntoView(elem) {
+  console.log('scrollllllooo')
+  const rect = elem.getBoundingClientRect();
+  const elemTop = rect.top;
+  const elemBottom = rect.bottom;
+
+  // Only completely visible elements return true:
+  const isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight);
+  // Partially visible elements return true:
+  //isVisible = elemTop < window.innerHeight && elemBottom >= 0;
+  return isVisible;
+}
+
+const firstIndex = 10;
+
 function addAllEventListeners() {
   const posts = document.querySelectorAll('.post-holder')
   if(posts.length) {
-    posts.forEach(async post => {
-      handlePostEvents(post)
-    })
+    posts.forEach(async (post, index) => handlePostEvents(post))
   };
+
+  document.addEventListener('scroll', () => {
+    if(isScrolledIntoView(posts[posts.length - 3])) {
+      console.log('is Visible')
+    }
+  })
 }
 
 function handlePostEvents(post) {

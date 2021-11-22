@@ -77,4 +77,4 @@ async function mainPlotting(amount) {
     }
 }
 
-mainPlotting(1)
+mainPlotting(10)
