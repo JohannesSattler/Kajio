@@ -29,6 +29,24 @@ function convertToTimeAgo(timestamp) {
     return sentence
 }
 
-module.exports = {convertToTimeAgo}
+/**
+ * creates advanced params for post model
+ * @param {Object} post Post model
+ * @param {ObjectID} userID from UserModel
+ */
+function createAdvancedPostKeys(post, userID) {
+    if(post.upvotes.includes(userID)) {
+        post.upvote = "some"
+      }
+      if(post.downvotes.includes(userID)) {
+        post.downvote = "some"
+      }
+  
+      post.votes = post.upvotes.length - post.downvotes.length
+      post.timeAgo = convertToTimeAgo(post.createdAt)
+      post.userid = userID
+}
+
+module.exports = {convertToTimeAgo, createAdvancedPostKeys}
 
 

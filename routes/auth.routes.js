@@ -12,8 +12,8 @@ router.get('/login', (req, res, next) => {
     res.render('auth/login.hbs')
 })
 
-router.get('/comment', (req, res, next) => {
-    res.render('auth/comment.hbs')
+router.get('/comment', async (req, res, next) => {
+    res.render('auth/comment.hbs', {comments})
 })
 
 router.post('/comment', (req, res, next) => {
