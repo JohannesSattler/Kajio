@@ -2,7 +2,7 @@ const router = require('express').Router();
 const UserModel = require('../models/User.model');
 const PostModel = require('../models/Post.model');
 const CommentModel = require('../models/Comment.model')
-//const bcrypt = require('bcryptjs');
+const bcrypt = require('bcryptjs');
 
 router.get('/signup', (req, res, next) => {
     res.render('auth/signup.hbs')
@@ -43,10 +43,10 @@ router.post('/profile', (req, res, next) => {
 router.post('/signup', (req, res, next) => {
     const {username, password} = req.body
 
-  //  let salt = bcrypt.genSaltSync(10);
-  //  let hash = bcrypt.hashSync(password, salt);
+   let salt = bcrypt.genSaltSync(10);
+   let hash = bcrypt.hashSync(password, salt);
 
-UserModel.create({username, password}) //:hash for regex pw
+UserModel.create({username, password: hash}) //:hash for regex pw
    .then(() => {
     res.redirect('/')
 })
@@ -58,10 +58,12 @@ UserModel.create({username, password}) //:hash for regex pw
 router.post('/login', (req, res, next) => {
     const{username, password} = req.body
 
-    UserModel.find({username})
+    UserModel.findOne({username})
     .then((usernameResponse) => {
-        if(usernameRespone.length){
-            let userObj = usernameResponse[0]
+        console.log(usernameResponse)
+        if(usernameResponse){
+            let userObj = usernameResponse
+            console.log(userObj)
 
             let isMatching = bcrypt.compareSync(password, userObj.password);
             if(isMatching){
@@ -75,12 +77,13 @@ router.post('/login', (req, res, next) => {
               }
           }
           else {
-            res.render('auth/login.hbs', {error: 'User email does not exist'})
+            res.render('auth/login.hbs', {error: 'check'})
             return;
           }
       })
       .catch((err) => {
-        next(err)
+        next(err) 
+        console.log('hello world')
       })
 })
 
