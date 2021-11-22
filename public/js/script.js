@@ -14,6 +14,10 @@ function addAllEventListeners() {
   };
 }
 
+function checkIfVoted(post) {
+  
+}
+
 function handlePostEvents(post) {
   const uparrow = post.querySelector('#votes-uparrow')
   const downarrow = post.querySelector('#votes-downarrow')
@@ -31,19 +35,15 @@ async function handleVoteClick(event) {
   const downVote = parent.querySelector('#votes-downarrow')
   const upVote = parent.querySelector('#votes-uparrow')
   const counter = parent.querySelector('#votes-amount')
-  let currentCount = Number(counter.innerText)
 
-  console.log(currentCount)
-
+  // chenge up/down vote buttons
   if(upOrDownVote) {
     upVote.classList.add('img-selected', 'img-upvote')
     downVote.classList.remove('img-selected', 'img-downvote')
-    counter.innerText = currentCount+1;
   } 
   else {
     upVote.classList.remove('img-selected', 'img-upvote')
     downVote.classList.add('img-selected', 'img-downvote')
-    counter.innerText = currentCount-1;
   }
 
   const data = await fetch("http://localhost:3000/home/vote", {
@@ -57,6 +57,7 @@ async function handleVoteClick(event) {
       upOrDownVote
     })
   })
-  
-  console.log(data.status)
+
+  const response = await data.json()
+  counter.innerText = JSON.parse(response).votes
 } 
