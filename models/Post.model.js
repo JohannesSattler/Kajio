@@ -15,6 +15,8 @@ const postSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'Comments',
     }],
+    totalVotes: Number,
+    commentsCount: Number,
   },
   {
     timestamps: true,

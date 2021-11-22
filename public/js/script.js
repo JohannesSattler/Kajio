@@ -7,52 +7,8 @@ document.addEventListener(
   false
 );
 
-// https://stackoverflow.com/a/22480938/14548868
-function isScrolledIntoView(elem) {
-  const rect = elem.getBoundingClientRect();
-  const elemTop = rect.top;
-  const elemBottom = rect.bottom;
-
-  // Only completely visible elements return true:
-  const isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight);
-  // Partially visible elements return true:
-  //isVisible = elemTop < window.innerHeight && elemBottom >= 0;
-  return isVisible;
-}
-
-let startIndex = 10;
-const increment = 10;
-
-async function infiniteScroller() {
-
-  const data = await fetch("http://localhost:3000/home/next-posts", {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      startIndex,
-      increment
-    })
-  })
-
-  console.log(startIndex, increment)
-
-  const response = JSON.parse(await data.json())
-  const container = document.querySelector('#main-container')
-
-  response.htmlArray.forEach(html => {
-    container.insertAdjacentHTML('beforeend', html)
-  })
-
-  startIndex += increment;
-}
-
 function addAllEventListeners() {
-  let posts = document.querySelectorAll('.post-holder')
-  if(posts.length) {
-    posts.forEach(async (post, index) => handlePostEvents(post))
-  };
+  addPostEventListeners()
 
   document.addEventListener('scroll', () => {
     if(isScrolledIntoView(posts[posts.length-1])) {
@@ -60,6 +16,15 @@ function addAllEventListeners() {
       posts = document.querySelectorAll('.post-holder')
     }
   })
+}
+
+let posts = null
+
+function addPostEventListeners() {
+  posts = document.querySelectorAll('.post-holder')
+  if(posts.length) {
+    posts.forEach(async (post, index) => handlePostEvents(post))
+  };
 }
 
 function handlePostEvents(post) {
@@ -105,3 +70,50 @@ async function handleVoteClick(event) {
   const response = await data.json()
   counter.innerText = JSON.parse(response).votes
 } 
+
+
+
+// https://stackoverflow.com/a/22480938/14548868
+function isScrolledIntoView(elem) {
+  const rect = elem.getBoundingClientRect();
+  const elemTop = rect.top;
+  const elemBottom = rect.bottom;
+
+  // Only completely visible elements return true:
+  const isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight);
+  // Partially visible elements return true:
+  //isVisible = elemTop < window.innerHeight && elemBottom >= 0;
+  return isVisible;
+}
+
+let startIndex = 10;
+const increment = 10;
+
+async function infiniteScroller() {
+  
+  const url = window.location.href;
+
+  const data = await fetch("http://localhost:3000/home/next-posts", {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      startIndex,
+      increment,
+      url
+    })
+  })
+
+  console.log(startIndex, increment)
+
+  const response = JSON.parse(await data.json())
+  const container = document.querySelector('#main-container')
+
+  response.htmlArray.forEach(html => {
+    container.insertAdjacentHTML('beforeend', html)
+  })
+
+  addPostEventListeners()
+  startIndex += increment;
+}

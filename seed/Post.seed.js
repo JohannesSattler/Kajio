@@ -5,7 +5,9 @@ function createFakePost(comments = []) {
     const sentence = faker.hacker.phrase()
     const upvotes = []
     const downvotes = []
-    return {sentence, upvotes, downvotes, comments}
+    const totalVotes = upvotes.length - downvotes.length;
+    const commentsCount = comments.length;
+    return {sentence, upvotes, downvotes, comments, totalVotes, commentsCount}
 }
 
 async function plotPostInDB(postData) {
