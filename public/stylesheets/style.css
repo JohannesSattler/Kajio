@@ -129,11 +129,6 @@ ul li {
   flex-direction: column;
   justify-content: center;
 }
-
-.vote-arrow {
-  height: 40px;
-}
-
 #votes-uparrow {
 
 }
@@ -149,15 +144,42 @@ ul li {
 #votes-downarrow {
 
 }
+.vote-arrow {
+  height: 40px;
+  opacity: 0.8;
+}
+.vote-arrow:disabled {
+  opacity: 1;
+}
 
 .vote-arrow:hover {
   cursor: pointer;
   transform: scale(1.1);
+  opacity: 1;
 }
 
 .vote-arrow:active {
   cursor: pointer;
   transform: scale(1.3);
+  opacity: 1;
+}
+
+.img-selected {
+  opacity: 1;
+  pointer-events: none;
+  cursor: default;
+}
+.img-upvote {
+  filter: drop-shadow(1px 1px 0 rgb(49, 228, 49)) 
+          drop-shadow(-1px 1px 0 rgb(49, 228, 49))
+          drop-shadow(1px -1px 0 rgb(49, 228, 49))
+          drop-shadow(-1px -1px 0 rgb(49, 228, 49));
+}
+.img-downvote {
+  filter: drop-shadow(1px 1px 0 rgb(228, 49, 49)) 
+          drop-shadow(-1px 1px 0 rgb(228, 49, 49))
+          drop-shadow(1px -1px 0 rgb(228, 49, 49))
+          drop-shadow(-1px -1px 0 rgb(228, 49, 49));
 }
 
 /* BOTTOM */
