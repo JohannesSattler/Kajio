@@ -1,5 +1,11 @@
 const router = require('express').Router();
 
+const UserModel = require('../models/User.model');
+const PostModel = require('../models/Post.model');
+const CommentModel = require('../models/Comment.model')
+
+const Helpers = require('../scripts/helpers')
+
 router.get('/comment', async (req, res, next) => {
     res.render('pages/comment.hbs', {comments})
 })

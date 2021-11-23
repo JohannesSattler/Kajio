@@ -1,6 +1,6 @@
 <h1>YOUR POSTS </h1>                       
 <div class="post-container">
-    {{#each postsCreated}}
+    {{#each data.postCreated}}
         {{> post data=this}}
     {{/each}}
 </div>
@@ -8,7 +8,7 @@
 <h1>NTERACTED WITH</h1>
 
 <div class="post-container">
-    {{#each postsInteracted}}
+    {{#each data.postUpvoted}}
         {{> post data=this}}
     {{/each}}
 </div>
@@ -16,7 +16,7 @@
 <h1>Comments</h1>
 
 <div class="post-container">
-    {{#each comments}}
+    {{#each data.comments}}
         {{> comment}}
     {{/each}}
 </div>

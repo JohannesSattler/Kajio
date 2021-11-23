@@ -1,9 +1,24 @@
 const router = require('express').Router();
+const UserModel = require('../models/User.model');
 
-router.get('/profile', (req, res, next) => {
-    // find user and populate data
+router.get('/profile', async (req, res, next) => {
+    // find first user for example
+    const users = await UserModel.find()
+        .populate('postCreated')
+        .populate('postUpvoted')
+        .populate('comments')
+
+    const randomIndex = Math.floor(Math.random() * users.length)
+    const currentUser = users[randomIndex]
     
-    res.render('profile/profile.hbs')
+    const data = {
+        postCreated: currentUser.postCreated,
+        postUpvoted: currentUser.postUpvoted,
+        comments: currentUser.comments
+    }
+
+    console.log(data)
+    res.render('profile/profile.hbs', {data})
 })
 
 router.get('/profile/new-post', (req, res, next) => {

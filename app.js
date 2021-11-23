@@ -54,6 +54,9 @@ app.use("/", authRoutes);
 const profileRoutes = require('./routes/profile.routes')
 app.use("/", profileRoutes);
 
+const commentRoutes = require('./routes/comments.routes')
+app.use("/", commentRoutes);
+
 const APIroutes = require('./routes/API.routes')
 app.use("/", APIroutes);
 
