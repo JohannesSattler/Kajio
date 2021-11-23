@@ -56,8 +56,7 @@ form button {
 }
 
 form button:hover {
-  background: #fff;
-  color: #43a3e6;
+  transform: scale(1.1);
   transition: 0.3s ease background;
 }
 
@@ -403,6 +402,46 @@ ul li {
   background-color: rgb(230, 159, 46);
   border: 5px solid rgb(235, 178, 86);
 }
+
+.comment-holder {
+  background-color: white;
+  margin: 0px 0;
+  padding: 1px 10px;
+  border-radius: 5px;
+  border-bottom: 4px solid rgb(149, 149, 149);
+}
+.comment-holder p {
+  line-height: 20px;
+  width: 100%;
+}
+.comment-holder i {
+  font-size: medium;
+  font-weight: 600;
+  opacity: 0.5;
+  letter-spacing: 4px;
+  width: 200px;
+  padding: 5px;
+  border-bottom: 1px solid gray;
+}
+
+.delete-button {
+  color: white;
+  border: 4px solid tomato;
+  background-color: rgb(255, 71, 71);
+  padding: 3px;
+  margin-bottom: 5px;
+  margin-left: 5px;
+}
+
+.update-button {
+  color: white;
+  border: 4px solid rgb(116, 146, 245);
+  background-color: rgb(71, 141, 255);
+  padding: 3px;
+  margin-bottom: 5px;
+  margin-left: 5px;
+}
+
 /* --- RESPONSIVE DESIGN ---- */
 
 #logo{

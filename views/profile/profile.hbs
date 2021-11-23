@@ -4,7 +4,7 @@
     <p>My posts</p>
 </div>                      
 <div class="post-container">
-    {{#if posts.postCreated.length}}
+    {{#if posts.postCreated}}
         {{#each posts.postCreated}}
             {{> post data=this}}
         {{/each}}
@@ -18,7 +18,7 @@
     <p>Interactions</p>
 </div>
 <div class="post-container">
-    {{#if posts.postUpvoted.length}}
+    {{#if posts.postUpvoted}}
         {{#each posts.postUpvoted}}
             {{> post data=this}}
         {{/each}}
@@ -32,7 +32,7 @@
     <p>Comments</p>
 </div>
 <div class="post-container">
-    {{#if posts.comments.length}}
+    {{#if posts.comments}}
         {{#each posts.comments}}
             {{> comment}}
         {{/each}}

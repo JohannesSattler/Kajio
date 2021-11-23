@@ -1,8 +1,20 @@
 <div class="comment-holder" id="{{this._id}}">
     <div class="content-holder">
+        <p><i>@{{this.username}}</i></p>
         <p>
             {{this.sentence}}
         </p>
-    </div>
-    <div class="line-break"></div>
+    </div>    
+
+    {{#if this.isUserOwner}}
+        <div style="display: flex; margin-left: 5px; margin-top: 5px; ">
+            <form method="post" style="margin: 0; width: 15%;" action="/profile/comment/{{this._id}}/delete">
+                <button type="submit" class="delete-button">Delete</button>
+            </form>
+        
+            <form method="post" style="margin: 0; width: 15%;" action="profile/comment/{{this._id}}/update">
+                <button class="update-button">Update</button>
+            </form> 
+        </div>
+    {{/if}}
 </div>
