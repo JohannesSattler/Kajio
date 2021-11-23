@@ -12,7 +12,7 @@ a {
 
 form {
   margin: 30px auto;
-  width: 30%;
+  width: 80%;
 }
 
 form label {
@@ -261,10 +261,6 @@ ul li {
   margin-right: 10px;
 }
 
-#body-holder {
-  margin-top: 100px;
-}
-
 #nav-holder{
   position: fixed;
   top: 0;
@@ -273,20 +269,20 @@ ul li {
   justify-content: space-between;
   align-items: center;
   background-color: #ececea;
-  height: 75px;
+  height: 80px;
   width: 100%;
-  max-width: 100%;
-  filter: drop-shadow(0 4px 10px black);
+  filter: drop-shadow(0 4px 10px rgb(61, 61, 61));
 }
 
 .nav-container {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   align-content: center;
   align-items: center;
   margin: 0px 10px;
-  width: 15%;
+  min-width: 25%;
+  max-width: 100%;
 }
 
 .nav-container div{
@@ -297,20 +293,19 @@ ul li {
 .middle-item {
   background-color:rgb(223, 223, 223);
   border-radius: 10px;
-  margin: 0 5px;
-  width: 100%;
+  margin: 0 10px;
+  width: 100px;
   display: flex;
   flex-direction: column;
   height: 100%;
-  border-bottom: 3px solid #00b7ff;
-
   transition: 0.3s;
 }
 
 .middle-item:hover {
   color: #f02b63;
-  border-bottom: 3px solid #f02b63;
+  border: 3px double #f02b63;
 }
+
 
 .middle-item img{
   margin-top: 5px;
@@ -351,21 +346,6 @@ ul li {
   transform: translate(7px, 7px);
 }
 
-#logo{
-  height: 75px;
-  transition: 0.3s;
-}
-
-#logo:hover{
-  filter: drop-shadow(2px 2px 0px rgb(170, 170, 170));
-  transform: translate(-2px, -2px);
-}
-
-#main-container {
-  margin-left: 20vw;
-  max-width: 35%;
-}
-
 .sign-holder {
   display: flex;
   flex-direction: column;
@@ -388,16 +368,62 @@ ul li {
 
 
 /* --- RESPONSIVE DESIGN ---- */
+
+#logo{
+  height: 75px;
+  max-width: 100%;
+  object-fit: cover;
+  transition: 0.3s;
+}
+
+#logo:hover{
+  filter: drop-shadow(2px 2px 0px rgb(170, 170, 170));
+  transform: translate(-2px, -2px);
+}
+
+#main-container {
+  margin-left: 20vw;
+  margin-top: 100px;
+  max-width: 35%;
+}
+
 @media only screen and (max-width: 800px) {
   #main-container {
+    margin-top: 100px;
     margin-left: 0vw;
     max-width: 100%;
+    transition: 0.1s;
+  }
+
+  #logo-holder, .login-disable{
+    display: none;
+  }  
+  #sing-link {
+    font-size: small;
+    padding: 2px 5px;
+  }
+  #newpost-but{
+   font-size: small;
+   padding: 5px 3px;
+  }
+  .middle-item {
+    margin: 0 2px;
+  }
+  .middle-item img {
+    height: 20px;
   }
 }
 
-@media only screen and (max-width: 1000px) and (min-width: 800px)  {
+@media only screen and (max-width: 1300px) and (min-width: 800px)  {
   #main-container {
+    margin-top: 100px;
     margin-left: 10vw;
     max-width: 70%;
+    transition: 0.1s;
   }
+
+  #logo{
+    height: 50px;
+    transition: 0.1s;
+  }  
 }
