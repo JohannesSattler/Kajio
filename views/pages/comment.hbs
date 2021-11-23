@@ -1,0 +1,14 @@
+<div id="main-container">
+    {{> post data=post}}
+
+  <form method="POST" action="/comment/{{post._id}}/create">
+    <label>Comment</label>
+    <textarea type="text" name="sentence" placeholder="Post your comment!"></textarea>
+    
+    <button type='submit'>Post</button>
+  </form>
+
+  {{#each comments}} 
+    {{> comment}}
+  {{/each}}
+</div>

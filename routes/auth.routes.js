@@ -12,32 +12,8 @@ router.get('/login', (req, res, next) => {
     res.render('auth/login.hbs')
 })
 
-router.get('/comment', async (req, res, next) => {
-    res.render('auth/comment.hbs', {comments})
-})
-
-router.post('/comment', (req, res, next) => {
-    const{username, sentence} = req.body
-
-    CommentModel.create({username, sentence})
-    .then(() => { 
-        res.redirect('/profile')
-    })
-    .catch((err) => {
-        next(err)
-    })
-})
-
 router.get('/homepage', (req, res, next) => {
     res.render('auth/homepage.hbs')
-})
-
-router.get('/profile', (req, res, next) => {
-    res.render('auth/profile.hbs')
-})
-
-router.post('/profile', (req, res, next) => {
-    res.render('auth/profile.hbs')
 })
 
 router.post('/signup', (req, res, next) => {
@@ -86,12 +62,5 @@ router.post('/login', (req, res, next) => {
         console.log('hello world')
       })
 })
-
-
-
-
-
-
-
 
 module.exports = router;
