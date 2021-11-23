@@ -12,7 +12,7 @@ a {
 
 form {
   margin: 30px auto;
-  width: 30%;
+  width: 80%;
 }
 
 form label {
@@ -261,10 +261,6 @@ ul li {
   margin-right: 10px;
 }
 
-#body-holder {
-  margin-top: 100px;
-}
-
 #nav-holder{
   position: fixed;
   top: 0;
@@ -361,11 +357,6 @@ ul li {
   transform: translate(-2px, -2px);
 }
 
-#main-container {
-  margin-left: 20vw;
-  max-width: 35%;
-}
-
 .sign-holder {
   display: flex;
   flex-direction: column;
@@ -388,15 +379,24 @@ ul li {
 
 
 /* --- RESPONSIVE DESIGN ---- */
+
+#main-container {
+  margin-left: 20vw;
+  margin-top: 100px;
+  max-width: 35%;
+}
+
 @media only screen and (max-width: 800px) {
   #main-container {
+    margin-top: 100px;
     margin-left: 0vw;
     max-width: 100%;
   }
 }
 
-@media only screen and (max-width: 1000px) and (min-width: 800px)  {
+@media only screen and (max-width: 1300px) and (min-width: 800px)  {
   #main-container {
+    margin-top: 100px;
     margin-left: 10vw;
     max-width: 70%;
   }
