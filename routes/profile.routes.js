@@ -35,7 +35,6 @@ router.get('/profile', async (req, res, next) => {
 })
 
 router.get('/profile/new-post', async (req, res, next) => {
-
     //get a random user 
     const users = await UserModel.find()
     const userID = users[0]._id;
