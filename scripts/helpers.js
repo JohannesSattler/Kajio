@@ -114,7 +114,9 @@ async function updatePostWithCounter(post, postID) {
 }
 
 /**
- * 
+ * Hot / trendy & new sort function
+ * @param {String} url current client url
+ * @returns a mongoose sort function
  */
 function getPostSortFromURL(url) {
     console.log(url);
@@ -131,11 +133,25 @@ function getPostSortFromURL(url) {
     return url2sort[key]
 }
 
+/**
+ * creates a post out of sentence
+ * @returns post objects
+ */
+function createPost(sentence) {
+    const upvotes = []
+    const downvotes = []
+    const comments = []
+    const totalVotes = upvotes.length - downvotes.length;
+    const commentsCount = comments.length;
+    return {sentence, upvotes, downvotes, comments, totalVotes, commentsCount}
+}
+
 module.exports = {
     convertToTimeAgo,
     createAdvancedPostKeys,
     hotPostSorting,
     clone,
     updatePostWithCounter,
-    getPostSortFromURL
+    getPostSortFromURL,
+    createPost
 }
