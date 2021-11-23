@@ -99,15 +99,42 @@ ul li {
   font-size: 2em;
 }
 
+.background-holder {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: -100;
+  height: 100%;
+  width: 100%;
+}
 
+.background-holder svg{
+  transform:scale(10);
+  opacity: 0.5;
+}
+
+.frontground-holder {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  height: 100%;
+  width: 100%;
+}
+
+.frontground-holder svg {
+  transform:scale(4.5);
+  opacity: 1;
+}
 
 /* PARTIALS */
 .post-holder {
+  background-color: white;
   margin: 20px 10px;
   border-radius: 5px;
-  width: 500px;
+  width: 100%;
   padding: 0px;
-  box-shadow: 0px 0px 3px;
+  box-shadow: 0px 0px 10px;
 }
 
 .post-holder p {
@@ -125,43 +152,46 @@ ul li {
 
 /* Votes */
 .vote-holder {
+  height: 100px;
+  font-size: 2.5rem;
   align-self: flex-end;
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
+  margin: 10px 0px;
+  border-left: 1px solid gray;
+  width: 10%;
 }
 #votes-uparrow {
 
 }
 
 #votes-amount {
-  font-size: 1.5em;
+  font-size: 2.5rem;
   padding: 0;
   margin: 0;
-  line-height: 0;
   text-align: center;
 }
 
 #votes-downarrow {
-
+  transform: rotate(180deg);
 }
+
 .vote-arrow {
-  height: 40px;
-  opacity: 0.8;
+  height: 30px;
+  opacity: 0.7;
+  transition: 0.3s;
+  filter: grayscale(100%);
 }
-.vote-arrow:disabled {
-  opacity: 1;
-}
-
 .vote-arrow:hover {
   cursor: pointer;
-  transform: scale(1.1);
   opacity: 1;
 }
 
 .vote-arrow:active {
   cursor: pointer;
-  transform: scale(1.3);
+  transform: scale(1.1);
   opacity: 1;
 }
 
@@ -170,17 +200,13 @@ ul li {
   pointer-events: none;
   cursor: default;
 }
+
 .img-upvote {
-  filter: drop-shadow(1px 1px 0 rgb(49, 228, 49)) 
-          drop-shadow(-1px 1px 0 rgb(49, 228, 49))
-          drop-shadow(1px -1px 0 rgb(49, 228, 49))
-          drop-shadow(-1px -1px 0 rgb(49, 228, 49));
+  filter: hue-rotate(0deg);
 }
+
 .img-downvote {
-  filter: drop-shadow(1px 1px 0 rgb(228, 49, 49)) 
-          drop-shadow(-1px 1px 0 rgb(228, 49, 49))
-          drop-shadow(1px -1px 0 rgb(228, 49, 49))
-          drop-shadow(-1px -1px 0 rgb(228, 49, 49));
+  filter: hue-rotate(230deg);
 }
 
 /* BOTTOM */
@@ -274,13 +300,14 @@ ul li {
   display: flex;
   flex-direction: column;
   height: 100%;
+  border-bottom: 3px solid #00b7ff;
 
   transition: 0.3s;
 }
 
 .middle-item:hover {
   color: #f02b63;
-  transform: scale(1.1);
+  border-bottom: 3px solid #f02b63;
 }
 
 .middle-item img{
@@ -334,6 +361,7 @@ ul li {
 
 #main-container {
   margin-left: 20vw;
+  max-width: 35%;
 }
 
 .sign-holder {
@@ -354,4 +382,20 @@ ul li {
 
 #sing-link:hover {
   color: #e61cdb;
+}
+
+
+/* --- RESPONSIVE DESIGN ---- */
+@media only screen and (max-width: 800px) {
+  #main-container {
+    margin-left: 0vw;
+    max-width: 100%;
+  }
+}
+
+@media only screen and (max-width: 1000px) and (min-width: 800px)  {
+  #main-container {
+    margin-left: 10vw;
+    max-width: 70%;
+  }
 }
