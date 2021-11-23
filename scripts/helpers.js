@@ -113,7 +113,6 @@ function createPost(sentence) {
 
 // gets the user and pushes ObjectIDs inside the Arrays
 async function updateUserArraysOfObjIDs(id, postCreatedItem, postUpvotedItem, commentsItem) {
-    let user = await UserModel.findById(id)
     const update = {};
 
     if(postCreatedItem) {

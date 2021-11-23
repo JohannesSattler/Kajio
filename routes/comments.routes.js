@@ -15,19 +15,18 @@ router.post('/comment/:postId/create', async (req, res, next) => {
     const {postId} = req.params;
     console.log(postId, sentence);
 
-    // find a random user
-    const currentUser = await UserModel.find()
-    const username = currentUser[0].username
+    // find the current user
+    const username = req.session.user.username
     
     // create comment
     const comment = await CommentModel.create({username, sentence})
 
     // add to post model
-    const post = await PostModel.findById(postId)
-    post.comments.push(comment._id)
-    await PostModel.findByIdAndUpdate(postId, {comments: post.comments})
+    await PostModel.findByIdAndUpdate(postId, {"$push": {comments: comment._id} })
 
-    console.log(post.comments)
+    // update user data
+    Helpers.updateUserArraysOfObjIDs(req.session.user._id, {commentsItem: comment._id })
+
     res.redirect('/comment/' + postId)
 })
 
@@ -35,8 +34,7 @@ router.get("/comment/:postId", async (req, res, next) => {
     const {postId} = req.params
     const post = await PostModel.findById(postId).populate('comments')
     
-    const currentUser = await UserModel.find()
-    Helpers.createAdvancedPostKeys(post, currentUser[0]._id)
+    Helpers.createAdvancedPostKeys(post, req.session.user._id)
   
     res.render("pages/comment.hbs", {post, comments: post.comments});
   });
