@@ -4,6 +4,14 @@ const PostModel = require('../models/Post.model');
 const CommentModel = require('../models/Comment.model')
 const bcrypt = require('bcryptjs');
 
+router.get('/landingpage', (req, res, next) => {
+    res.render('auth/landingpage.hbs')
+})
+
+router.post('/landingpage', (req, res, next) => {
+    res.redirect('auth/homepage.hbs')
+})
+
 router.get('/signup', (req, res, next) => {
     res.render('auth/signup.hbs')
 })
