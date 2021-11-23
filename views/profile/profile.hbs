@@ -1,0 +1,22 @@
+<h1>YOUR POSTS </h1>                       
+<div class="post-container">
+    {{#each postsCreated}}
+        {{> post data=this}}
+    {{/each}}
+</div>
+
+<h1>NTERACTED WITH</h1>
+
+<div class="post-container">
+    {{#each postsInteracted}}
+        {{> post data=this}}
+    {{/each}}
+</div>
+
+<h1>Comments</h1>
+
+<div class="post-container">
+    {{#each comments}}
+        {{> comment}}
+    {{/each}}
+</div>
