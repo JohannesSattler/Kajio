@@ -66,41 +66,6 @@ function clone(cloneObj) {
     return JSON.parse(JSON.stringify(cloneObj))
 }
 
-
-// ------------------------------
-//  DO I EVEN NEED THIS?
-// --------------------------
-
-/**
- * Sorts all time post by upvotes & comments
- * @param {Object} posts 
- * @returns new post array
- */
-function hotPostSorting(posts) {
-    const clonePost = clone(posts) // deep clone the object
-    
-    clonePost.sort((a, b) => {
-        const upvotesA = a.upvotes.length - a.downvotes.length; // gets upvotes from a
-        const upvotesB = b.upvotes.length - b.downvotes.length; // gets upvotes from b
-
-        if(upvotesA > upvotesB) return 1;
-        else if (upvotesA < upvotesB) return -1;
-        else { //check for comment amount 
-            if(a.comments.length > b.comments.length) {
-                return 1;
-            }
-            else if(a.comments.length < b.comments.length) {
-                return -1;
-            }
-            else {
-                return 0;
-            }
-        }
-    })
-
-    return clonePost;
-}
-
 /**
  * Updates the post with a counter
  * @param {Object} post // the post that should be updated
@@ -149,7 +114,6 @@ function createPost(sentence) {
 module.exports = {
     convertToTimeAgo,
     createAdvancedPostKeys,
-    hotPostSorting,
     clone,
     updatePostWithCounter,
     getPostSortFromURL,

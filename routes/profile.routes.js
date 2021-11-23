@@ -14,16 +14,24 @@ router.get('/profile', async (req, res, next) => {
     const randomIndex = Math.floor(Math.random() * users.length)
     const currentUser = users[randomIndex]
     
+    // make sure all post have some calculated values
+    currentUser.postCreated.forEach(post => {
+      Helpers.createAdvancedPostKeys(post, currentUser._id)
+    })
+
+    currentUser.postUpvoted.forEach(post => {
+        Helpers.createAdvancedPostKeys(post, currentUser._id)
+    })
+
     // can be replaced with userobj in the future
     // just for testing
-    const data = {
+    const posts = {
         postCreated: currentUser.postCreated,
         postUpvoted: currentUser.postUpvoted,
         comments: currentUser.comments
     }
 
-    console.log(data)
-    res.render('profile/profile.hbs', {data})
+    res.render('profile/profile.hbs', {posts})
 })
 
 router.get('/profile/new-post', async (req, res, next) => {

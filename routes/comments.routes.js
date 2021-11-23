@@ -12,6 +12,7 @@ router.get('/comment', async (req, res, next) => {
 
 router.post('/comment/create', (req, res, next) => {
     const{username, sentence} = req.body
+    
 
     CommentModel.create({username, sentence})
     .then(() => { 

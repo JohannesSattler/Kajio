@@ -1,22 +1,24 @@
-<h1>YOUR POSTS </h1>                       
-<div class="post-container">
-    {{#each data.postCreated}}
-        {{> post data=this}}
-    {{/each}}
-</div>
+<div id="main-container">
+    <h1>YOUR POSTS </h1>                       
+    <div class="post-container">
+        {{#each posts.postCreated}}
+            {{> post data=this}}
+        {{/each}}
+    </div>
 
-<h1>NTERACTED WITH</h1>
+    <h1>NTERACTED WITH</h1>
 
-<div class="post-container">
-    {{#each data.postUpvoted}}
-        {{> post data=this}}
-    {{/each}}
-</div>
+    <div class="post-container">
+        {{#each posts.postUpvoted}}
+            {{> post data=this}}
+        {{/each}}
+    </div>
 
-<h1>Comments</h1>
+    <h1>Comments</h1>
 
-<div class="post-container">
-    {{#each data.comments}}
-        {{> comment}}
-    {{/each}}
+    <div class="post-container">
+        {{#each posts.comments}}
+            {{> comment}}
+        {{/each}}
+    </div>   
 </div>
