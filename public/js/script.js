@@ -48,13 +48,25 @@ async function handleVoteClick(event) {
   const upVote = parent.querySelector('#votes-uparrow')
   const counter = parent.querySelector('#votes-amount')
 
-  // chenge up/down vote buttons
+  // change up/down vote buttons
   if (upOrDownVote) {
-    upVote.classList.add('img-selected', 'img-upvote')
-    downVote.classList.remove('img-selected', 'img-downvote')
+    if(upVote.classList.contains('img-upvote')) {
+      upVote.classList.remove('img-upvote')
+    }
+    else {
+      upVote.classList.add('img-upvote')
+    }
+
+    downVote.classList.remove('img-downvote')
   } else {
-    upVote.classList.remove('img-selected', 'img-upvote')
-    downVote.classList.add('img-selected', 'img-downvote')
+    upVote.classList.remove('img-upvote')
+
+    if(downVote.classList.contains('img-downvote')) {
+      downVote.classList.remove('img-downvote')
+    }
+    else {
+      downVote.classList.add('img-downvote')
+    }
   }
 
   const data = await fetch("http://localhost:3000/home/vote", {

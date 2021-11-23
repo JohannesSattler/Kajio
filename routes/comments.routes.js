@@ -20,12 +20,13 @@ router.post('/comment/:postId/create', async (req, res, next) => {
     
     // create comment
     const comment = await CommentModel.create({username, sentence})
+    console.log('THis is my comment ID: ', comment._id);
 
     // add to post model
-    await PostModel.findByIdAndUpdate(postId, {"$push": {comments: comment._id} })
+    await PostModel.findByIdAndUpdate(postId, {"$push": {comments: comment._id}})
 
     // update user data
-    Helpers.updateUserArraysOfObjIDs(req.session.user._id, {commentsItem: comment._id })
+    Helpers.updateUserArraysOfObjIDs(req.session.user._id, null, null, comment._id)
 
     res.redirect('/comment/' + postId)
 })
@@ -33,10 +34,10 @@ router.post('/comment/:postId/create', async (req, res, next) => {
 router.get("/comment/:postId", async (req, res, next) => {
     const {postId} = req.params
     const post = await PostModel.findById(postId).populate('comments')
-    
+
     Helpers.createAdvancedPostKeys(post, req.session.user._id)
   
     res.render("pages/comment.hbs", {post, comments: post.comments});
-  });
+});
 
 module.exports = router;

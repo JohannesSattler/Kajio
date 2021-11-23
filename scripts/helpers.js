@@ -113,23 +113,17 @@ function createPost(sentence) {
 
 // gets the user and pushes ObjectIDs inside the Arrays
 async function updateUserArraysOfObjIDs(id, postCreatedItem, postUpvotedItem, commentsItem) {
-    const update = {};
-
     if(postCreatedItem) {
-        update['postCreated'] = postCreatedItem
+        await UserModel.findByIdAndUpdate(id, {"$push": {postCreated: postCreatedItem} })
     }
 
     if(postUpvotedItem) {
-        update['postUpvoted'] = postUpvotedItem
+        await UserModel.findByIdAndUpdate(id, {"$push": {postUpvoted: postUpvotedItem}})
     }
 
     if(commentsItem) {
-        update['comments'] = commentsItem
+        await UserModel.findByIdAndUpdate(id, {"$push": {comments: commentsItem}})
     }
-
-    console.log(update)
-    const updatedUser = await UserModel.findByIdAndUpdate(id, {"$push": {update} })
-    return updatedUser
 }
 
 module.exports = {
