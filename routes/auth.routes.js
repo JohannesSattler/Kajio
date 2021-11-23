@@ -43,8 +43,8 @@ router.post('/login', (req, res, next) => {
 
             let isMatching = bcrypt.compareSync(password, userObj.password);
             if(isMatching){
-                req.session.myProperty = userObj
-
+                req.session.user = userObj
+                console.log('My User: ', req.session.user)
                 res.redirect('/profile')
             }
             else{
