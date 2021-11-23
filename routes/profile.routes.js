@@ -5,53 +5,46 @@ const Helpers = require('../scripts/helpers')
 
 router.get('/profile', async (req, res, next) => {
     // Get all users and populates all posts & comments
-    const users = await UserModel.find()
+    const user = await UserModel.findById(req.session.user._id)
         .populate('postCreated')
         .populate('postUpvoted')
         .populate('comments')
 
-    // gets a user at random index just for testing
-    const randomIndex = Math.floor(Math.random() * users.length)
-    const currentUser = users[randomIndex]
-    
     // make sure all post have some calculated values
-    currentUser.postCreated.forEach(post => {
-      Helpers.createAdvancedPostKeys(post, currentUser._id)
+    user.postCreated.forEach(post => {
+      Helpers.createAdvancedPostKeys(post, user._id)
     })
 
-    currentUser.postUpvoted.forEach(post => {
-        Helpers.createAdvancedPostKeys(post, currentUser._id)
+    user.postUpvoted.forEach(post => {
+        Helpers.createAdvancedPostKeys(post, user._id)
     })
 
     // can be replaced with userobj in the future
     // just for testing
     const posts = {
-        postCreated: currentUser.postCreated,
-        postUpvoted: currentUser.postUpvoted,
-        comments: currentUser.comments
+        postCreated: user.postCreated,
+        postUpvoted: user.postUpvoted,
+        comments: user.comments
     }
 
     res.render('profile/profile.hbs', {posts})
 })
 
 router.get('/profile/new-post', async (req, res, next) => {
-    //get a random user 
-    const users = await UserModel.find()
-    const userID = users[0]._id;
-
-    res.render('profile/newPost.hbs', {userID})
+    res.render('profile/newPost.hbs', {userID: req.session.user._id})
 })
 
 router.post('/profile/new-post', async (req, res, next) => {
     const {sentence} = req.body
     console.log(sentence);
 
-    //get a random user 
-    const users = await UserModel.find()
-    const userID = users[0]._id;
-
     const post = Helpers.createPost(sentence)
-    await PostModel.create(post)
+    const newPost = await PostModel.create(post)
+
+    const updatedUser = Helpers.updateUserArraysOfObjIDs(req.session.user._id, newPost._id)
+    console.log({updatedUser})
+
+    req.session.user = updatedUser
 
     res.redirect('/home/new')
 })

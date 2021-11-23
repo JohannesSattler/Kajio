@@ -4,6 +4,14 @@ const PostModel = require('../models/Post.model');
 const CommentModel = require('../models/Comment.model')
 const bcrypt = require('bcryptjs');
 
+router.get('/landingpage', (req, res, next) => {
+    res.render('auth/landingpage.hbs')
+})
+
+router.post('/landingpage', (req, res, next) => {
+    res.redirect('auth/homepage.hbs')
+})
+
 router.get('/signup', (req, res, next) => {
     res.render('auth/signup.hbs')
 })
@@ -17,12 +25,12 @@ router.get('/homepage', (req, res, next) => {
 })
 
 router.post('/signup', (req, res, next) => {
-    const {username, password} = req.body
+    const {username, email, password} = req.body
 
    let salt = bcrypt.genSaltSync(10);
    let hash = bcrypt.hashSync(password, salt);
 
-UserModel.create({username, password: hash}) //:hash for regex pw
+UserModel.create({username, email, password: hash}) //:hash for regex pw
    .then(() => {
         res.redirect('/')
     })
@@ -43,8 +51,8 @@ router.post('/login', (req, res, next) => {
 
             let isMatching = bcrypt.compareSync(password, userObj.password);
             if(isMatching){
-                req.session.myProperty = userObj
-
+                req.session.user = userObj
+                console.log('My User: ', req.session.user)
                 res.redirect('/profile')
             }
             else{

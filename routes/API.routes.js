@@ -16,6 +16,7 @@ router.post("/home/vote", async (req, res, next) => {
     postID,
     upOrDownVote
   } = req.body
+
   const updatedPost = await PostModel.findById(postID)
 
   // check for up or downvote and check if its includes in upvote or downvote
@@ -59,17 +60,14 @@ router.post("/home/next-posts", async (req, res, next) => {
     res.status(200).json(JSON.stringify({warning: 'No content found for more posts'}))
     return;
   }
-
+  // reads partial file as string and compiles it
   const templateStr = fs.readFileSync(path.resolve(__dirname, '../views/partials/post.hbs')).toString('utf8')
   const template = hbs.compile(templateStr)
-
-  const currentUser = await UserModel.find()
-
 
   // oh boi: creates an html array out of post.hbs partials with next post values
   const htmlArray = []
   posts.forEach(post => {
-  Helpers.createAdvancedPostKeys(post, currentUser[0]._id)
+  Helpers.createAdvancedPostKeys(post, req.session.user._id)
 
     const html = template({
       data: post

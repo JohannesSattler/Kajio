@@ -1,23 +1,43 @@
 
-<h1>YOUR POSTS </h1>                       
+
+<div class="profile-header col-purple">
+    <p>My posts</p>
+</div>                      
 <div class="post-container">
-    {{#each posts.postCreated}}
-        {{> post data=this}}
-    {{/each}}
+    {{#if posts.postCreated.length}}
+        {{#each posts.postCreated}}
+            {{> post data=this}}
+        {{/each}}
+
+        {{else}}
+        <p><i>Oh there is no data</i></p>
+    {{/if}}
 </div>
 
-<h1>INTERACTED WITH</h1>
-
+<div class="profile-header col-purp-orang">
+    <p>Interactions</p>
+</div>
 <div class="post-container">
-    {{#each posts.postUpvoted}}
-        {{> post data=this}}
-    {{/each}}
+    {{#if posts.postUpvoted.length}}
+        {{#each posts.postUpvoted}}
+            {{> post data=this}}
+        {{/each}}
+
+        {{else}}
+        <p><i>Oh there is no data</i></p>
+    {{/if}}
 </div>
 
-<h1>Comments</h1>
-
+<div class="profile-header col-orange">
+    <p>Comments</p>
+</div>
 <div class="post-container">
-    {{#each posts.comments}}
-        {{> comment}}
-    {{/each}}
+    {{#if posts.postUpvoted.length}}
+        {{#each posts.comments}}
+            {{> comment}}
+        {{/each}}
+
+        {{else}}
+        <p><i>Oh there is no data</i></p>
+    {{/if}}
 </div>   
