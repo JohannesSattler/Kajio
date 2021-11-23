@@ -17,12 +17,12 @@ router.get('/homepage', (req, res, next) => {
 })
 
 router.post('/signup', (req, res, next) => {
-    const {username, password} = req.body
+    const {username, email, password} = req.body
 
    let salt = bcrypt.genSaltSync(10);
    let hash = bcrypt.hashSync(password, salt);
 
-UserModel.create({username, password: hash}) //:hash for regex pw
+UserModel.create({username, email, password: hash}) //:hash for regex pw
    .then(() => {
         res.redirect('/')
     })

@@ -3,7 +3,8 @@ const { Schema, model } = require("mongoose");
 const userSchema = new Schema(
   {
     username: String,
-   // email: String,
+    email: String, 
+    
     password: String,
     postCreated: [{
       type: Schema.Types.ObjectId,
