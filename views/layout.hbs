@@ -9,38 +9,43 @@
       <link rel="stylesheet" href="/stylesheets/style.css">
    </head>
 
-
-
    <body>
-     
-     <nav>
-          
-         <ul id='nav-bar-holder'>
-            <li>
-                <img id="logo" src="images/logo-color.png">
-            </li>
-            <li>
-               <a href="/"> Home </a>
-            </li>
-            <li>
-                <a href="/profile"> Profile </a>
-            </li>
-            <li>
-                <a href="/comment"> Comments </a>
-            </li>
-            <li>
-               <a href="/signup">Signup</a> 
-            </li>
-            <li>
-               <a href="/login">LogIn</a> 
-            </li>
-        
-         </ul>
-      </nav> 
+      
+      <nav id='nav-holder'>
+         <a href="/home" class="nav-container">
+            <img id="logo" src="../images/logo-color.png">
+         </a>
 
-     
+         <div class="nav-container">
 
-      {{{body}}}
+            <a class="middle-item" href="/home/hot"> 
+               <img src="https://cdn-icons-png.flaticon.com/512/633/633652.png" alt="">
+               <p>Hot</p>
+            </a>
+
+            <a class="middle-item"href="/home/trendy"> 
+               <img src="https://cdn-icons-png.flaticon.com/512/3121/3121784.png" alt="">
+               <p>Trendy</p>
+            </a>
+
+            <a class="middle-item"href="/home/new"> 
+               <img src="https://cdn-icons-png.flaticon.com/512/3282/3282468.png" alt="">
+               <p>New</p>
+            </a>
+         </div>
+
+         <div class="nav-container">
+            <a href="/profile/new-post">
+               <button id="newpost-but">New Post</button>
+            </a> 
+            <a id="sing-link" href="/signup">Signup</a> 
+            <a id="sing-link" href="/login"> Login </a> 
+         </div>
+      </nav>
+
+      <div id="body-holder">
+         {{{body}}}
+      </div>
 
       <script src="/js/script.js" height="300"></script>
    </body>

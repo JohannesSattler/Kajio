@@ -48,19 +48,28 @@ router.post("/home/vote", async (req, res, next) => {
 // infinite scroll get next post after point x
 router.post("/home/next-posts", async (req, res, next) => {
   const {startIndex, increment, url} = req.body
-  
-  const sort = Helpers.getPostSortFromURL(url) // get the sort function
-  const posts = await PostModel.find().sort(sort).skip(startIndex).limit(increment) //get next values
+
+  // get the sort function
+  const sort = Helpers.getPostSortFromURL(url)
+  //get next values for infinite scroll
+  const posts = await PostModel.find().sort(sort).skip(startIndex).limit(increment)
+
+  // send back no content to client
+  if(!posts.length) {
+    res.status(200).json(JSON.stringify({warning: 'No content found for more posts'}))
+    return;
+  }
 
   const templateStr = fs.readFileSync(path.resolve(__dirname, '../views/partials/post.hbs')).toString('utf8')
   const template = hbs.compile(templateStr)
 
   const currentUser = await UserModel.find()
 
-  const htmlArray = []
+
   // oh boi: creates an html array out of post.hbs partials with next post values
+  const htmlArray = []
   posts.forEach(post => {
-    Helpers.createAdvancedPostKeys(post, currentUser[0]._id)
+  Helpers.createAdvancedPostKeys(post, currentUser[0]._id)
 
     const html = template({
       data: post
@@ -73,9 +82,8 @@ router.post("/home/next-posts", async (req, res, next) => {
     htmlArray.push(html)
   })
 
-  res.status(200).json(JSON.stringify({
-    htmlArray
-  }))
+  // send back data to client
+  res.status(200).json(JSON.stringify({htmlArray}))
 });
 
 module.exports = router;

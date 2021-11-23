@@ -1,5 +1,6 @@
 body {
-  padding: 50px;
+  padding: 0px;
+  margin: 0;
   font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif;
 }
 
@@ -232,19 +233,125 @@ ul li {
   margin-right: 10px;
 }
 
-#logo{
-  background-color: #f02b63;
-  height: 100%;
-  order: 1;
+#body-holder {
+  margin-top: 100px;
 }
 
-#nav-bar-holder{
-justify-content: space-around;
-display: flex;
-width: 100%;
-height: 75px;
-order:2;
-flex-direction: row;
+#nav-holder{
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ececea;
+  height: 75px;
+  width: 100%;
+  max-width: 100%;
+  filter: drop-shadow(0 4px 10px black);
+}
 
+.nav-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+  margin: 0px 10px;
+  width: 15%;
+}
 
+.nav-container div{
+  height: 100%;
+  padding: 10px;
+}
+
+.middle-item {
+  background-color:rgb(223, 223, 223);
+  border-radius: 10px;
+  margin: 0 5px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  transition: 0.3s;
+}
+
+.middle-item:hover {
+  color: #f02b63;
+  transform: scale(1.1);
+}
+
+.middle-item img{
+  margin-top: 5px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.middle-item p {
+  text-align: center;
+  font-size: small;
+  line-height: 0;
+}
+
+.horiz-linebreak {
+  padding-top: 50px;
+  padding-bottom: 50%;
+  width: 1px;
+  background-color: rgb(65, 65, 65);
+}
+
+#newpost-but {
+  background-color: rgb(105, 92, 223);
+  color: white;
+  font-size: large;
+  border-width: 0;
+  border-radius: 10px;
+  padding: 10px 20px;
+  filter: drop-shadow(-3px -3px 0px rgb(68, 61, 161));
+  transform: translate(3px, 3px);
+
+  transition: 0.3s;
+}
+
+#newpost-but:hover {
+  cursor: pointer;
+  background-color: rgb(228, 143, 32);
+  filter: drop-shadow(-7px -7px 0px rgb(199, 156, 101));
+  transform: translate(7px, 7px);
+}
+
+#logo{
+  height: 75px;
+  transition: 0.3s;
+}
+
+#logo:hover{
+  filter: drop-shadow(2px 2px 0px rgb(170, 170, 170));
+  transform: translate(-2px, -2px);
+}
+
+#main-container {
+  margin-left: 20vw;
+}
+
+.sign-holder {
+  display: flex;
+  flex-direction: column;
+}
+.link-holder {
+  background-color: #00b7ff;
+}
+
+#sing-link {
+  margin: 0;
+  padding: 0;
+  font-size: medium;
+  color: #292929;
+  transition: 0.3s;
+}
+
+#sing-link:hover {
+  color: #e61cdb;
 }

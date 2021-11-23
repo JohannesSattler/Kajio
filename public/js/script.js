@@ -11,9 +11,12 @@ function addAllEventListeners() {
   addPostEventListeners()
 
   document.addEventListener('scroll', () => {
-    if(isScrolledIntoView(posts[posts.length-1])) {
-      infiniteScroller()
-      posts = document.querySelectorAll('.post-holder')
+    const url = window.location.href;
+    if (url.endsWith('home/hot') || url.endsWith('home/trendy') || url.endsWith('home/new')) {
+      if (isScrolledIntoView(posts[posts.length - 1])) {
+        infiniteScroller()
+        posts = document.querySelectorAll('.post-holder')
+      }
     }
   })
 }
@@ -22,7 +25,7 @@ let posts = null
 
 function addPostEventListeners() {
   posts = document.querySelectorAll('.post-holder')
-  if(posts.length) {
+  if (posts.length) {
     posts.forEach(async (post, index) => handlePostEvents(post))
   };
 }
@@ -46,11 +49,10 @@ async function handleVoteClick(event) {
   const counter = parent.querySelector('#votes-amount')
 
   // chenge up/down vote buttons
-  if(upOrDownVote) {
+  if (upOrDownVote) {
     upVote.classList.add('img-selected', 'img-upvote')
     downVote.classList.remove('img-selected', 'img-downvote')
-  } 
-  else {
+  } else {
     upVote.classList.remove('img-selected', 'img-upvote')
     downVote.classList.add('img-selected', 'img-downvote')
   }
@@ -69,7 +71,7 @@ async function handleVoteClick(event) {
 
   const response = await data.json()
   counter.innerText = JSON.parse(response).votes
-} 
+}
 
 
 
@@ -88,9 +90,11 @@ function isScrolledIntoView(elem) {
 
 let startIndex = 10;
 const increment = 10;
+let endOfPageReached = false
 
 async function infiniteScroller() {
-  
+  if (endOfPageReached) return;
+
   const url = window.location.href;
 
   const data = await fetch("http://localhost:3000/home/next-posts", {
@@ -108,6 +112,13 @@ async function infiniteScroller() {
   console.log(startIndex, increment)
 
   const response = JSON.parse(await data.json())
+
+  // End of page reached
+  if (response.warning) {
+    endOfPageReached = true;
+    return;
+  }
+
   const container = document.querySelector('#main-container')
 
   response.htmlArray.forEach(html => {
