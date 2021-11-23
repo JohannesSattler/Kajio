@@ -32,12 +32,12 @@
     <p>Comments</p>
 </div>
 <div class="post-container">
-    {{#if posts.postUpvoted.length}}
+    {{#if posts.comments.length}}
         {{#each posts.comments}}
             {{> comment}}
         {{/each}}
 
         {{else}}
-        <p><i>Oh there is no data</i></p>
+        <p><i>Oh boi there is no data</i></p>
     {{/if}}
 </div>   

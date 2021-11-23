@@ -31,8 +31,12 @@ router.post('/signup', (req, res, next) => {
    let hash = bcrypt.hashSync(password, salt);
 
 UserModel.create({username, email, password: hash}) //:hash for regex pw
-   .then(() => {
-        res.redirect('/')
+   .then((userObj) => {
+        console.log(userObj)
+        req.session.user = userObj
+        req.session.save()
+
+        res.redirect('/login')
     })
     .catch((err) => {
         next(err)
@@ -52,6 +56,8 @@ router.post('/login', (req, res, next) => {
             let isMatching = bcrypt.compareSync(password, userObj.password);
             if(isMatching){
                 req.session.user = userObj
+                req.session.save()
+
                 console.log('My User: ', req.session.user)
                 res.redirect('/profile')
             }

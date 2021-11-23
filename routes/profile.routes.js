@@ -10,9 +10,10 @@ router.get('/profile', async (req, res, next) => {
         .populate('postUpvoted')
         .populate('comments')
 
+    console.log(user, req.session.user)
     // make sure all post have some calculated values
     user.postCreated.forEach(post => {
-      Helpers.createAdvancedPostKeys(post, user._id)
+        Helpers.createAdvancedPostKeys(post, user._id)
     })
 
     user.postUpvoted.forEach(post => {
@@ -41,10 +42,8 @@ router.post('/profile/new-post', async (req, res, next) => {
     const post = Helpers.createPost(sentence)
     const newPost = await PostModel.create(post)
 
-    const updatedUser = Helpers.updateUserArraysOfObjIDs(req.session.user._id, newPost._id)
+    const updatedUser = await Helpers.updateUserArraysOfObjIDs(req.session.user._id, newPost._id)
     console.log({updatedUser})
-
-    req.session.user = updatedUser
 
     res.redirect('/home/new')
 })
