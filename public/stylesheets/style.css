@@ -298,15 +298,14 @@ ul li {
   display: flex;
   flex-direction: column;
   height: 100%;
-  border-bottom: 3px solid #00b7ff;
-
   transition: 0.3s;
 }
 
 .middle-item:hover {
   color: #f02b63;
-  border-bottom: 5px solid #f02b63;
+  border: 3px double #f02b63;
 }
+
 
 .middle-item img{
   margin-top: 5px;
@@ -405,7 +404,7 @@ ul li {
   }
   #newpost-but{
    font-size: small;
-   padding: 2px 3px;
+   padding: 5px 3px;
   }
   .middle-item {
     margin: 0 2px;
