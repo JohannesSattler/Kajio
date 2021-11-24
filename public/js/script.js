@@ -69,7 +69,8 @@ async function handleVoteClick(event) {
     }
   }
 
-  const data = await fetch("http://localhost:3000/home/vote", {
+  const server = process.env.SERVER_URL || "http://localhost:3000";
+  const data = await fetch(server + "/home/vote", {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -109,7 +110,8 @@ async function infiniteScroller() {
 
   const url = window.location.href;
 
-  const data = await fetch("http://localhost:3000/home/next-posts", {
+  const server = process.env.SERVER_URL || "http://localhost:3000";
+  const data = await fetch(server + "/home/next-posts", {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
