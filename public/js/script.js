@@ -104,10 +104,13 @@ function isScrolledIntoView(elem) {
 let startIndex = 10;
 const increment = 10;
 let endOfPageReached = false
+let loading = false;
 
 async function infiniteScroller() {
   if (endOfPageReached) return;
-
+  if(loading) return;
+  
+  loading = true;
   const url = window.location.href;
 
   const server = window.location.origin;
@@ -124,7 +127,7 @@ async function infiniteScroller() {
   })
 
   console.log(startIndex, increment)
-  
+
   const response = JSON.parse(await data.json())
 
   // End of page reached
@@ -141,4 +144,6 @@ async function infiniteScroller() {
 
   addPostEventListeners()
   startIndex += increment;
+
+  loading = false;
 }
