@@ -1,4 +1,6 @@
 const { Schema, model } = require("mongoose");
+const PostModel = require("./Post.model");
+
 
 const commentSchema = new Schema(
   {
@@ -8,8 +10,8 @@ const commentSchema = new Schema(
   {
     timestamps: true,
   }
-);
+  );
+  
+  const CommentModel = model("Comments", commentSchema);
 
-const CommentModel = model("Comments", commentSchema);
-
-module.exports = CommentModel;
+  module.exports = CommentModel;

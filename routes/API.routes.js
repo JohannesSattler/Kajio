@@ -53,6 +53,8 @@ router.post("/home/vote", async (req, res, next) => {
   }
 
   Helpers.updatePostWithCounter(updatedPost, updatedPost._id)
+  Helpers.updateUserArraysOfObjIDs(req.session.user, null, updatedPost._id, null)
+  
   // send back the votes data
   const votes = updatedPost.upvotes.length - updatedPost.downvotes.length
   res.status(200).json(JSON.stringify({
