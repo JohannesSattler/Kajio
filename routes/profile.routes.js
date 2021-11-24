@@ -42,11 +42,12 @@ router.get('/profile/new-post', async (req, res, next) => {
 router.post('/profile/new-post', async (req, res, next) => {
     const {sentence} = req.body
     console.log(sentence);
-
-    const post = Helpers.createPost(sentence)
+    
+    const user = await UserModel.findById(req.session.user._id)
+    const post = Helpers.createPost(user.username, sentence)
     const newPost = await PostModel.create(post)
     
-    const updatedUser = await Helpers.updateUserArraysOfObjIDs(req.session.user._id, newPost._id)
+    await Helpers.updateUserArraysOfObjIDs(req.session.user._id, newPost._id)
     res.redirect('/home/new')
 })
 

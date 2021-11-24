@@ -146,7 +146,8 @@ ul li {
 
 .post-holder p {
   color: #646464;
-  line-height: 10px;
+  line-height: 20px;
+  margin: 0;
 }
 
 /* Top Holder */

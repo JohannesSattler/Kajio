@@ -56,7 +56,6 @@ async function createAdvancedPostKeys(post, userID) {
     post.votes = post.upvotes.length - post.downvotes.length
     post.timeAgo = convertToTimeAgo(post.createdAt)
     post.userid = userID
-    post.user = await UserModel.findById(userID)
 }
 
 /**
@@ -103,13 +102,13 @@ function getPostSortFromURL(url) {
  * creates a post out of sentence
  * @returns post objects
  */
-function createPost(sentence) {
+function createPost(username, sentence) {
     const upvotes = []
     const downvotes = []
     const comments = []
     const totalVotes = upvotes.length - downvotes.length;
     const commentsCount = comments.length;
-    return {sentence, upvotes, downvotes, comments, totalVotes, commentsCount}
+    return {username, sentence, upvotes, downvotes, comments, totalVotes, commentsCount}
 }
 
 // gets the user and pushes ObjectIDs inside the Arrays
