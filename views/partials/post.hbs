@@ -9,7 +9,7 @@
             <div class="post-objectID" id="{{data._id}}"></div>
             <div class="user-objectID" id="{{data.userid}}"></div>
             {{#if data.upvote}}
-                <img id="votes-uparrow" class="vote-arrow img-selected img-upvote"
+                <img id="votes-uparrow" class="vote-arrow img-upvote"
                 src="https://cdn-icons-png.flaticon.com/512/892/892683.png">
                 {{else}}
                 <img id="votes-uparrow" class="vote-arrow"
@@ -21,7 +21,7 @@
             </p>
 
             {{#if data.downvote}}
-                <img id="votes-downarrow" class="vote-arrow img-selected img-downvote"
+                <img id="votes-downarrow" class="vote-arrow img-downvote"
                 src="https://cdn-icons-png.flaticon.com/512/892/892625.png">
                 {{else}}
                 <img id="votes-downarrow" class="vote-arrow"
