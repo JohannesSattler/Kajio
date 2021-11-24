@@ -2,8 +2,8 @@ const router = require('express').Router();
 const UserModel = require('../models/User.model');
 const PostModel = require('../models/Post.model');
 const CommentModel = require('../models/Comment.model');
-
-const Helpers = require('../scripts/helpers')
+const Helpers = require('../scripts/helpers');
+const mongoose = require('mongoose');
 
 router.get('/profile', async (req, res, next) => {
     // Get all users and populates all posts & comments
@@ -12,7 +12,7 @@ router.get('/profile', async (req, res, next) => {
         .populate('postUpvoted')
         .populate('comments')
 
-    console.log(user, req.session.user)
+    //console.log(user, req.session.user)
     // make sure all post have some calculated values
     user.postCreated.forEach(post => {
         Helpers.createAdvancedPostKeys(post, user._id)
@@ -46,22 +46,28 @@ router.post('/profile/new-post', async (req, res, next) => {
 
     const post = Helpers.createPost(sentence)
     const newPost = await PostModel.create(post)
-
+    
     const updatedUser = await Helpers.updateUserArraysOfObjIDs(req.session.user._id, newPost._id)
-    console.log({updatedUser})
-
     res.redirect('/home/new')
 })
 
 router.post('/profile/comment/:commentID/delete', async (req, res, next) => {
     const {commentID} = req.params
     await CommentModel.findByIdAndDelete(commentID)
+    // delete comments from Post & User model
+    await PostModel.updateMany({ $pull: {"comments": mongoose.Types.ObjectId(commentID)}} )
+    await UserModel.findByIdAndUpdate(req.session.user._id, {$pull: {"comments": mongoose.Types.ObjectId(commentID)}})
+
     res.redirect('/profile')
 })
 
 router.post('/profile/post/:postID/delete', async (req, res, next) => {
     const {postID} = req.params
     await PostModel.findByIdAndDelete(postID)
+
+    // delete post from User model
+    await UserModel.findByIdAndUpdate(req.session.user._id, {$pull: {"postCreated": mongoose.Types.ObjectId(postID)}})
+
     res.redirect('/profile')
 })
 
