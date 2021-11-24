@@ -4,6 +4,7 @@ const PostModel = require('../models/Post.model');
 const CommentModel = require('../models/Comment.model');
 const Helpers = require('../scripts/helpers');
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 
 router.get('/profile', Helpers.userLoginProtected, async (req, res, next) => {
     // Get all users and populates all posts & comments
@@ -39,7 +40,7 @@ router.get('/profile/new-post', Helpers.userLoginProtected, async (req, res, nex
     res.render('profile/newPost.hbs', {userID: req.session.user._id})
 })
 
-router.post('/profile/new-post', async (req, res, next) => {
+router.post('/profile/new-post', Helpers.userLoginProtected, async (req, res, next) => {
     const {sentence} = req.body
     console.log(sentence);
     
@@ -68,6 +69,27 @@ router.post('/profile/post/:postID/delete', Helpers.userLoginProtected, async (r
     // delete post from User model
     await UserModel.findByIdAndUpdate(req.session.user._id, {$pull: {"postCreated": mongoose.Types.ObjectId(postID)}})
 
+    res.redirect('/profile')
+})
+
+router.get('/profile/update-user', Helpers.userLoginProtected, async (req, res, next) => {
+    res.render('profile/updateUser.hbs')
+})
+
+router.post('/profile/update-user', Helpers.userLoginProtected, async (req, res, next) => {
+    const {username, password} = req.body
+
+    let salt = bcrypt.genSaltSync(10);
+    let hash = bcrypt.hashSync(password, salt);
+
+    const newUser = await UserModel.findByIdAndUpdate(req.session.user._id, {username, password: hash})
+    req.session.user = newUser
+    res.redirect('/profile')
+})
+
+router.get('/profile/delete-user', Helpers.userLoginProtected, async (req, res, next) => {
+    await UserModel.findByIdAndDelete(req.session.user._id);
+    req.session.destroy()
     res.redirect('/profile')
 })
 

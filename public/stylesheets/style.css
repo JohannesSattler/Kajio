@@ -425,6 +425,10 @@ ul li {
   background-color: rgb(230, 159, 46);
   border: 5px solid rgb(235, 178, 86);
 }
+.col-red {
+  background-color: rgb(230, 46, 46);
+  border: 5px solid rgb(230, 46, 46);
+}
 
 .comment-holder {
   background-color: white;

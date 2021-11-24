@@ -36,7 +36,7 @@ UserModel.create({username, email, password: hash}) //:hash for regex pw
         req.session.user = userObj
         req.session.save()
 
-        res.redirect('/login')
+        res.redirect('/home')
     })
     .catch((err) => {
         next(err)

@@ -82,6 +82,8 @@ async function handleVoteClick(event) {
     })
   })
 
+  console.log(gifs)
+
   const response = await data.json()
   counter.innerText = JSON.parse(response).votes
 }
