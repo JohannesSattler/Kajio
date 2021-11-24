@@ -21,7 +21,6 @@ router.get('/profile', async (req, res, next) => {
 
     user.postUpvoted.forEach(post => {
         Helpers.createAdvancedPostKeys(post, user._id)
-        post.isUserOwner = true
     })
 
     user.comments.forEach(comment => comment.isUserOwner = true)

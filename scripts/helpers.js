@@ -45,7 +45,7 @@ function convertToTimeAgo(timestamp) {
  * @param {Object} post Post model
  * @param {ObjectID} userID from UserModel
  */
-function createAdvancedPostKeys(post, userID) {
+async function createAdvancedPostKeys(post, userID) {
     if (post.upvotes.includes(userID)) {
         post.upvote = "some"
     }
@@ -56,6 +56,7 @@ function createAdvancedPostKeys(post, userID) {
     post.votes = post.upvotes.length - post.downvotes.length
     post.timeAgo = convertToTimeAgo(post.createdAt)
     post.userid = userID
+    post.user = await UserModel.findById(userID)
 }
 
 /**
