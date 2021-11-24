@@ -22,8 +22,8 @@ async function homeSubRoutes(req, res, route) {
     .sort(sort)
     .limit(10)
   
-  posts.forEach(post => {
-    Helpers.createAdvancedPostKeys(post, req.session.user._id)
+  posts.forEach(async post => {
+    await Helpers.createAdvancedPostKeys(post, req.session.user._id)
   })
 
   res.render("pages/main.hbs", {posts});
