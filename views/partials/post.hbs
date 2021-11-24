@@ -2,9 +2,9 @@
     <div class="top-holder">
         <div class="content-holder">
             {{#if data.username}}
-                <p>@{{data.username}}</p>
+                <p><i class="username-holder">@{{data.username}}</i></p>
             {{else}}
-                <p>@unknown</p>
+                <p><i class="username-holder">@unknown</i></p>
             {{/if}}
             <p style="white-space: pre-line">
                 {{data.sentence}}
@@ -44,11 +44,8 @@
         </div>
         <div id="comment-sect">
             <a href="/comment/{{data._id}}">
-                Go to comments
-            </a>
-            <p>
                 {{data.comments.length}} comments
-            </p>
+            </a>
         </div>
     </div>
 
@@ -58,9 +55,9 @@
                 <button class="delete-button">Delete</button>
             </form>
         
-            <form method="post" style="margin: 0; width: 15%;" action="profile/post/{{data._id}}/update">
+<!--             <form method="post" style="margin: 0; width: 15%;" action="profile/post/{{data._id}}/update">
                 <button class="update-button">Update</button>
-            </form> 
+            </form>  -->
         </div>
     {{/if}}
 </div>

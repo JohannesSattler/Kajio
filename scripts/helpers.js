@@ -4,6 +4,15 @@ const UserModel = require('../models/User.model');
 // trendy sorting: [["createdAt", "desc"], ["totalVotes","desc"], ["commentsCount","desc"]]
 // new sorting: {createdAt: -1}
 
+function userLoginProtected(req, res, next) {
+    if(!req.session.user) {
+        res.redirect('/login')
+    }
+    else {
+        next()
+    }
+}
+
 /**
  * converts a timestamp to a sentence how long ago
  * @param {Date} timestamp timestamp from DB timestamps
@@ -127,6 +136,7 @@ async function updateUserArraysOfObjIDs(id, postCreatedItem, postUpvotedItem, co
 }
 
 module.exports = {
+    userLoginProtected,
     convertToTimeAgo,
     createAdvancedPostKeys,
     clone,

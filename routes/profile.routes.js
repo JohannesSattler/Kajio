@@ -5,7 +5,7 @@ const CommentModel = require('../models/Comment.model');
 const Helpers = require('../scripts/helpers');
 const mongoose = require('mongoose');
 
-router.get('/profile', async (req, res, next) => {
+router.get('/profile', Helpers.userLoginProtected, async (req, res, next) => {
     // Get all users and populates all posts & comments
     const user = await UserModel.findById(req.session.user._id)
         .populate('postCreated')
@@ -35,7 +35,7 @@ router.get('/profile', async (req, res, next) => {
     res.render('profile/profile.hbs', {posts})
 })
 
-router.get('/profile/new-post', async (req, res, next) => {
+router.get('/profile/new-post', Helpers.userLoginProtected, async (req, res, next) => {
     res.render('profile/newPost.hbs', {userID: req.session.user._id})
 })
 
@@ -51,7 +51,7 @@ router.post('/profile/new-post', async (req, res, next) => {
     res.redirect('/home/new')
 })
 
-router.post('/profile/comment/:commentID/delete', async (req, res, next) => {
+router.post('/profile/comment/:commentID/delete', Helpers.userLoginProtected, async (req, res, next) => {
     const {commentID} = req.params
     await CommentModel.findByIdAndDelete(commentID)
     // delete comments from Post & User model
@@ -61,7 +61,7 @@ router.post('/profile/comment/:commentID/delete', async (req, res, next) => {
     res.redirect('/profile')
 })
 
-router.post('/profile/post/:postID/delete', async (req, res, next) => {
+router.post('/profile/post/:postID/delete', Helpers.userLoginProtected, async (req, res, next) => {
     const {postID} = req.params
     await PostModel.findByIdAndDelete(postID)
 

@@ -10,7 +10,7 @@ const UserModel = require('../models/User.model');
 const Helpers = require('../scripts/helpers')
 
 // Route to upvote and downvote
-router.post("/home/vote", async (req, res, next) => {
+router.post("/home/vote", Helpers.userLoginProtected, async (req, res, next) => {
   const {
     userID,
     postID,
@@ -63,7 +63,7 @@ router.post("/home/vote", async (req, res, next) => {
 });
 
 // infinite scroll get next post after point x
-router.post("/home/next-posts", async (req, res, next) => {
+router.post("/home/next-posts", Helpers.userLoginProtected, async (req, res, next) => {
   const {startIndex, increment, url} = req.body
 
   // get the sort function
