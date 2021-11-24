@@ -6,11 +6,11 @@ const CommentModel = require('../models/Comment.model')
 
 const Helpers = require('../scripts/helpers')
 
-router.get('/comment', async (req, res, next) => {
+router.get('/comment', Helpers.userLoginProtected, async (req, res, next) => {
     res.render('pages/comment.hbs', {comments})
 })
 
-router.post('/comment/:postId/create', async (req, res, next) => {
+router.post('/comment/:postId/create', Helpers.userLoginProtected, async (req, res, next) => {
     const{sentence} = req.body
     const {postId} = req.params;
     console.log(postId, sentence);
@@ -31,7 +31,7 @@ router.post('/comment/:postId/create', async (req, res, next) => {
     res.redirect('/comment/' + postId)
 })
 
-router.get("/comment/:postId", async (req, res, next) => {
+router.get("/comment/:postId", Helpers.userLoginProtected, async (req, res, next) => {
     const {postId} = req.params
     const post = await PostModel.findById(postId).populate('comments')
 
