@@ -100,9 +100,10 @@ app.js
 # Links
 
 [Github Repository](https://github.com/JohannesSattler/Kajio)
+
 [Trello Board](https://trello.com/b/DZP4W8RC/kajio)
 
 ## Deploy
-[Github Pages]
-[Deploy link]
+[Not working Github Pages](https://johannessattler.github.io/Kajio)
+[Deploy link](https://kajio.herokuapp.com/)
 

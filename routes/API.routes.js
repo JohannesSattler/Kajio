@@ -10,7 +10,7 @@ const UserModel = require('../models/User.model');
 const Helpers = require('../scripts/helpers')
 
 // Route to upvote and downvote
-router.post("/home/vote", async (req, res, next) => {
+router.post("/home/vote", Helpers.userLoginProtected, async (req, res, next) => {
   const {
     userID,
     postID,
@@ -63,7 +63,7 @@ router.post("/home/vote", async (req, res, next) => {
 });
 
 // infinite scroll get next post after point x
-router.post("/home/next-posts", async (req, res, next) => {
+router.post("/home/next-posts", Helpers.userLoginProtected, async (req, res, next) => {
   const {startIndex, increment, url} = req.body
 
   // get the sort function
@@ -82,8 +82,8 @@ router.post("/home/next-posts", async (req, res, next) => {
 
   // oh boi: creates an html array out of post.hbs partials with next post values
   const htmlArray = []
-  posts.forEach(post => {
-  Helpers.createAdvancedPostKeys(post, req.session.user._id)
+  posts.forEach(async post => {
+  await Helpers.createAdvancedPostKeys(post, req.session.user._id)
 
     const html = template({
       data: post
@@ -92,7 +92,6 @@ router.post("/home/next-posts", async (req, res, next) => {
       allowProtoMethodsByDefault: true,
       allowProtoPropertiesByDefault: true,
     });
-
     htmlArray.push(html)
   })
 

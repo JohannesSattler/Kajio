@@ -4,6 +4,15 @@ const UserModel = require('../models/User.model');
 // trendy sorting: [["createdAt", "desc"], ["totalVotes","desc"], ["commentsCount","desc"]]
 // new sorting: {createdAt: -1}
 
+function userLoginProtected(req, res, next) {
+    if(!req.session.user) {
+        res.redirect('/login')
+    }
+    else {
+        next()
+    }
+}
+
 /**
  * converts a timestamp to a sentence how long ago
  * @param {Date} timestamp timestamp from DB timestamps
@@ -45,7 +54,7 @@ function convertToTimeAgo(timestamp) {
  * @param {Object} post Post model
  * @param {ObjectID} userID from UserModel
  */
-function createAdvancedPostKeys(post, userID) {
+async function createAdvancedPostKeys(post, userID) {
     if (post.upvotes.includes(userID)) {
         post.upvote = "some"
     }
@@ -102,13 +111,13 @@ function getPostSortFromURL(url) {
  * creates a post out of sentence
  * @returns post objects
  */
-function createPost(sentence) {
+function createPost(username, sentence) {
     const upvotes = []
     const downvotes = []
     const comments = []
     const totalVotes = upvotes.length - downvotes.length;
     const commentsCount = comments.length;
-    return {sentence, upvotes, downvotes, comments, totalVotes, commentsCount}
+    return {username, sentence, upvotes, downvotes, comments, totalVotes, commentsCount}
 }
 
 // gets the user and pushes ObjectIDs inside the Arrays
@@ -127,6 +136,7 @@ async function updateUserArraysOfObjIDs(id, postCreatedItem, postUpvotedItem, co
 }
 
 module.exports = {
+    userLoginProtected,
     convertToTimeAgo,
     createAdvancedPostKeys,
     clone,

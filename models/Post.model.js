@@ -2,6 +2,7 @@ const { Schema, model } = require("mongoose");
 
 const postSchema = new Schema(
   {
+    username: String,
     sentence: String,
     upvotes: [{
       type: Schema.Types.ObjectId,

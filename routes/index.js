@@ -11,7 +11,7 @@ router.get("/", (req, res, next) => {
 });
 
 // HOME PAGES
-router.get("/home", async (req, res, next) => {
+router.get("/home", Helpers.userLoginProtected, async (req, res, next) => {
   res.redirect('/home/hot')
 });
 
@@ -22,22 +22,22 @@ async function homeSubRoutes(req, res, route) {
     .sort(sort)
     .limit(10)
   
-  posts.forEach(post => {
-    Helpers.createAdvancedPostKeys(post, req.session.user._id)
+  posts.forEach(async post => {
+    await Helpers.createAdvancedPostKeys(post, req.session.user._id)
   })
 
   res.render("pages/main.hbs", {posts});
 }
 
-router.get("/home/hot", async (req, res, next) => {
+router.get("/home/hot", Helpers.userLoginProtected, async (req, res, next) => {
   homeSubRoutes(req, res, "/home/hot")
 });
 
-router.get("/home/trendy", async (req, res, next) => {
+router.get("/home/trendy", Helpers.userLoginProtected, async (req, res, next) => {
   homeSubRoutes(req, res, "/home/trendy")
 });
 
-router.get("/home/new", async (req, res, next) => {
+router.get("/home/new", Helpers.userLoginProtected, async (req, res, next) => {
   homeSubRoutes(req, res, "/home/new")
 });
 
