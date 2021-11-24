@@ -82,8 +82,8 @@ router.post("/home/next-posts", Helpers.userLoginProtected, async (req, res, nex
 
   // oh boi: creates an html array out of post.hbs partials with next post values
   const htmlArray = []
-  posts.forEach(async post => {
-  await Helpers.createAdvancedPostKeys(post, req.session.user._id)
+  await posts.forEach(async post => {
+    await Helpers.createAdvancedPostKeys(post, req.session.user._id)
 
     const html = template({
       data: post
@@ -92,9 +92,10 @@ router.post("/home/next-posts", Helpers.userLoginProtected, async (req, res, nex
       allowProtoMethodsByDefault: true,
       allowProtoPropertiesByDefault: true,
     });
+
     htmlArray.push(html)
   })
-
+  
   // send back data to client
   res.status(200).json(JSON.stringify({htmlArray}))
 });
