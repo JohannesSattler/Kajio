@@ -136,17 +136,17 @@ ul li {
 /* PARTIALS */
 .post-holder {
   background-color: white;
-  border-radius: 3px;
-  margin-bottom: 5px;
+  border-radius: 10px;
+  margin-bottom: 10px;
   width: 100%;
-  border: 4px solid rgb(197, 195, 195);
+  border: 4px solid #625F63;
   filter: drop-shadow(0 0 3px rgb(216, 215, 215));
   padding: 10px;
 }
 
 .post-holder p {
   color: #646464;
-  line-height: 10px;
+  line-height: 20px;
 }
 
 /* Top Holder */
@@ -272,7 +272,7 @@ ul li {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #ececea;
+  background-color: #F5F5F5;
   height: 80px;
   width: 100%;
   filter: drop-shadow(0 4px 10px rgb(61, 61, 61));
@@ -493,9 +493,9 @@ ul li {
   opacity: 0.5;
   margin-left: 15vw;
   width: 45%;
-  background-color: #c2c0c0;
-  border-left: 10px solid #856cb3;
-  border-right: 10px solid #b38c6c;
+  background-color: #72727E;
+  border-left: 10px solid #9893DA;
+  border-right: 10px solid #9893DA;
   filter: drop-shadow(0 0 10px rgb(65, 65, 65));
 }
 
