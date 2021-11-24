@@ -69,7 +69,7 @@ async function handleVoteClick(event) {
     }
   }
 
-  const server = process.env.SERVER_URL || "http://localhost:3000";
+  const server = window.location.origin;
   const data = await fetch(server + "/home/vote", {
     method: 'POST',
     headers: {
@@ -110,7 +110,7 @@ async function infiniteScroller() {
 
   const url = window.location.href;
 
-  const server = process.env.SERVER_URL || "http://localhost:3000";
+  const server = window.location.origin;
   const data = await fetch(server + "/home/next-posts", {
     method: 'POST',
     headers: {
