@@ -1,7 +1,7 @@
 # Kajio
 
 ## Description: 
-Kajio is an anonymous social media platform where you can post thoughts, pictures and ideas. With every post other users will be able to either upvote, downvote, or comment on the post. There will be other sections outside of the regular post feed that feature the most liked posts of the day, the most interacted with posts of a certain time frame, and the newest posts for those who like to be first on the scene. 
+Kajio is a social media platform where you can post thoughts, pictures and ideas. With every post other users will be able to either upvote, downvote, or comment on the post. There will be other sections outside of the regular post feed that feature the most liked posts of the day, the most interacted with posts of a certain time frame, and the newest posts for those who like to be first on the scene. 
 
 ## MVP: 
 
@@ -103,7 +103,10 @@ app.js
 
 [Trello Board](https://trello.com/b/DZP4W8RC/kajio)
 
+[Google slides](https://docs.google.com/presentation/d/1YKAqAAcolyvdNSiInacLqCohCw1Cc_bwZPN0GEYUzZ8/edit?usp=sharing)
+
 ## Deploy
 [Not working Github Pages](https://johannessattler.github.io/Kajio)
+
 [Deploy link](https://kajio.herokuapp.com/)
 
