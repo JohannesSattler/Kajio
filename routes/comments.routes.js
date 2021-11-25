@@ -40,4 +40,10 @@ router.get("/comment/:postId", Helpers.userLoginProtected, async (req, res, next
     res.render("pages/comment.hbs", {post, comments: post.comments});
 });
 
+router.get("/post/random", Helpers.userLoginProtected, async (req, res, next) => {
+    const post = await PostModel.find()
+    const randomPost = post[Math.floor(Math.random() * post.length)];
+    res.redirect('/comment/' + randomPost._id)
+});
+
 module.exports = router;
