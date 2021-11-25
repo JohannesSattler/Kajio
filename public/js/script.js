@@ -127,7 +127,7 @@ async function infiniteScroller() {
   })
 
   console.log(startIndex, increment)
-
+  
   const response = JSON.parse(await data.json())
 
   // End of page reached
