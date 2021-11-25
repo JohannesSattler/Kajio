@@ -1,3 +1,5 @@
+![KAJIO](https://i.imgur.com/pTDaOQp.png)
+
 # Kajio
 
 ## Description: 
