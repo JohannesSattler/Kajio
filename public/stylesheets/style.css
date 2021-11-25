@@ -338,6 +338,15 @@ ul li {
   border-bottom-right-radius: 20px;
 }
 
+.profile {
+  margin: 0%;
+  background-color: transparent;
+  border: 0;
+}
+.profile:hover {
+  color: #f08a2b;
+  border: 0;
+}
 
 .middle-item img{
   margin-top: 5px;
