@@ -7,7 +7,7 @@ const Helpers = require('../scripts/helpers')
 
 /* GET home page */
 router.get("/", (req, res, next) => {
-  res.render("index");
+  res.redirect("/landingpage");
 });
 
 // HOME PAGES

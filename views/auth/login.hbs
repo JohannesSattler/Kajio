@@ -7,9 +7,12 @@
 
   <label>Password</label>
   <input type="password" name="password" placeholder="Enter your Password"  >
- 
-  <button type='submit'>Log In</button>
-  <a href="/signup">Signup</a>
+  
+  <div class="log-or-sign">
+    <button type='submit'>Log In</button>
+    <p>or</p>
+    <a href="/signup">Signup</a>
+  </div>
 
   {{#if error}}
      <div>{{error}}</div>

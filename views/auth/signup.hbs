@@ -6,8 +6,13 @@
   <input name="email" type="email"  placeholder="Enter your email"  >  
 
   <label>Password</label>
-  <input name="password" type="password"  placeholder="Enter your Password"  >
-  <button>Sign Up</button>
+  <input name="password" type="password"  placeholder="Create a password"  >
+
+  <div class="log-or-sign">
+    <button type='submit'>Signup</button>
+    <p>or</p>
+    <a href="/signup">Login</a>
+  </div>
 </form>
 
 {{#if error}}
