@@ -23,10 +23,31 @@ router.get('/login', (req, res, next) => {
 router.get('/homepage', (req, res, next) => {
     res.render('auth/homepage.hbs')
 })
+//regex info
+function CheckPassword(inputtxt) 
+{ 
+var regex=  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
+if(inputtxt.match(regex)) 
+{ 
+return true;
+}
+else
+{ 
+('Create a password 8-15 characters long, one uppercase letter, 1 number, and #1 special character')
+return false;
+}
+} 
+
+
 
 router.post('/signup', (req, res, next) => {
     const {username, email, password} = req.body
 
+    
+      if(!CheckPassword(password)){
+       res.render('auth/signup.hbs', {error: 'Password needs to be 8-15 characters long, one uppercase letter, 1 number, and #1 special character'})
+       return;
+      };
    let salt = bcrypt.genSaltSync(10);
    let hash = bcrypt.hashSync(password, salt);
 
@@ -36,7 +57,7 @@ UserModel.create({username, email, password: hash}) //:hash for regex pw
         req.session.user = userObj
         req.session.save()
 
-        res.redirect('/login')
+        res.redirect('/home/hot')
     })
     .catch((err) => {
         next(err)
